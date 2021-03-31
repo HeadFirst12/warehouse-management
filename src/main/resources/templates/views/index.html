@@ -84,8 +84,8 @@
       <!-- 侧边菜单 -->
       <div class="layui-side layui-side-menu">
         <div class="layui-side-scroll">
-          <div class="layui-logo" lay-href="/console">
-            <span>layuiAdmin</span>
+          <div class="layui-logo">
+            <span>电商仓储系统</span>
           </div>
           
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
@@ -322,31 +322,13 @@
             <li data-name="app" class="layui-nav-item">
               <a href="javascript:;" lay-tips="应用" lay-direction="2">
                 <i class="layui-icon layui-icon-app"></i>
-                <cite>应用</cite>
+                <cite>库存管理</cite>
               </a>
               <dl class="layui-nav-child">
-                
-                <dd data-name="content">
-                  <a href="javascript:;">内容系统</a>
-                  <dl class="layui-nav-child">
-                    <dd data-name="list"><a lay-href="app/content/list.html">文章列表</a></dd>
-                    <dd data-name="tags"><a lay-href="app/content/tags.html">分类管理</a></dd>
-                    <dd data-name="comment"><a lay-href="app/content/comment.html">评论管理</a></dd>
-                  </dl>
-                </dd>
-                <dd data-name="forum">
-                  <a href="javascript:;">社区系统</a>
-                  <dl class="layui-nav-child">
-                    <dd data-name="list"><a lay-href="app/forum/list.html">帖子列表</a></dd>
-                    <dd data-name="replys"><a lay-href="app/forum/replys.html">回帖列表</a></dd>
-                  </dl>
-                </dd>
-                <dd>
-                  <a lay-href="app/message/index">消息中心</a>
-                </dd>
-                <dd data-name="workorder">
-                  <a lay-href="app/workorder/list.html">工单系统</a>
-                </dd>
+                <dd data-name="list"><a lay-href="/app/content/outlist">入库管理</a></dd>
+                <dd data-name="list"><a lay-href="/app/content/entrylist">出库管理</a></dd>
+                <dd data-name="list"><a lay-href="/app/content/querylist">库存查询</a></dd>
+                <dd data-name="list"><a lay-href="/app/content/loglist">库存操作日志</a></dd>
               </dl>
             </li>
             <li data-name="senior" class="layui-nav-item">

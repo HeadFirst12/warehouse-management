@@ -37,10 +37,20 @@ public class MvcConfig implements WebMvcConfigurer {
         //角色权限管理
         registry.addViewController("/user/administrators/role").setViewName("views/user/administrators/role");
 
-        //添加用户
+        //添加和编辑用户
         registry.addViewController("/user/administrators/adminform").setViewName("views/user/administrators/adminform");
 
+        //出库列表
+        registry.addViewController("/app/content/outlist").setViewName("views/app/content/outlist");
 
+        //入库列表
+        registry.addViewController("/app/content/entrylist").setViewName("views/app/content/entrylist");
+
+        //商品查询
+        registry.addViewController("/app/content/querylist").setViewName("views/app/content/querylist");
+
+        //库存日志列表
+        registry.addViewController("/app/content/loglist").setViewName("views/app/content/loglist");
 
     }
 

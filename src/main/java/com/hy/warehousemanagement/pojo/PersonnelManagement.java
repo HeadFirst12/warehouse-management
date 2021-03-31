@@ -20,23 +20,22 @@ public class PersonnelManagement implements Serializable {
 
     //人员主键
     private Long id;
+    //用户名
+    private String userName;
+    //密码
+    private String userPassword;
+    //人员级别,0超级管理员，1管理员，2普通员工
+    private Integer permissionLevel;
     //人员姓名
     private String name;
     //人员年龄
     private Integer age;
     //人员电话
     private String tel;
-    //人员级别,0超级管理员，1管理员，2普通员工
-    private Integer permissionLevel;
-    //用户名
-    private String userName;
-    //密码
-    private String userPassword;
-    //是否授权
-    private Boolean authorize;
     //性别
     private Boolean sex;
     //加入时间
     private Date joinTime;
-
+    //是否授权
+    private Boolean authorize;
 }

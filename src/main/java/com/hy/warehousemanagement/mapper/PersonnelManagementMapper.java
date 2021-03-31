@@ -10,6 +10,10 @@ import java.util.List;
 @Repository
 public interface PersonnelManagementMapper {
 
+    /**
+     * 查询管理人员列表
+     * @return
+     */
     List<PersonnelManagement> queryPersonnelManagementList();
 
     String queryPersonnelManagementNameById(Long id);

@@ -38,7 +38,7 @@
         <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
           
           <li class="layui-nav-item" lay-unselect>
-            <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心">
+            <a lay-href="app/message/index" layadmin-event="message" lay-text="消息中心">
               <i class="layui-icon layui-icon-notice"></i>  
               
               <!-- 如果有新消息，则显示小圆点 -->
@@ -62,11 +62,11 @@
           </li>
           <li class="layui-nav-item" lay-unselect>
             <a href="javascript:;">
-              <cite>贤心</cite>
+              <cite>管理员</cite>
             </a>
             <dl class="layui-nav-child">
-              <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-              <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+              <dd><a lay-href="set/user/info">基本资料</a></dd>
+              <dd><a lay-href="set/user/password">修改密码</a></dd>
               <hr>
               <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
             </dl>
@@ -84,7 +84,7 @@
       <!-- 侧边菜单 -->
       <div class="layui-side layui-side-menu">
         <div class="layui-side-scroll">
-          <div class="layui-logo" lay-href="home/console.html">
+          <div class="layui-logo" lay-href="/console">
             <span>layuiAdmin</span>
           </div>
           
@@ -96,7 +96,7 @@
               </a>
               <dl class="layui-nav-child">
                 <dd data-name="console" class="layui-this">
-                  <a lay-href="/console">控制台</a>
+                  <a lay-href="home/console">控制台</a>
                 </dd>
                 <dd data-name="console">
                   <a lay-href="home/homepage1.html">主页一</a>
@@ -342,7 +342,7 @@
                   </dl>
                 </dd>
                 <dd>
-                  <a lay-href="app/message/index.html">消息中心</a>
+                  <a lay-href="app/message/index">消息中心</a>
                 </dd>
                 <dd data-name="workorder">
                   <a lay-href="app/workorder/list.html">工单系统</a>
@@ -375,13 +375,10 @@
               </a>
               <dl class="layui-nav-child">
                 <dd>
-                  <a lay-href="user/user/list.html">网站用户</a>
+                  <a lay-href="user/administrators/list">用户管理</a>
                 </dd>
                 <dd>
-                  <a lay-href="user/administrators/list.html">后台管理员</a>
-                </dd>
-                <dd>
-                  <a lay-href="user/administrators/role.html">角色管理</a>
+                  <a lay-href="user/administrators/role">角色权限管理</a>
                 </dd>
               </dl>
             </li>
@@ -401,8 +398,8 @@
                 <dd class="layui-nav-itemed">
                   <a href="javascript:;">我的设置</a>
                   <dl class="layui-nav-child">
-                    <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                    <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                    <dd><a lay-href="set/user/info">基本资料</a></dd>
+                    <dd><a lay-href="set/user/password">修改密码</a></dd>
                   </dl>
                 </dd>
               </dl>
@@ -444,7 +441,7 @@
       <!-- 主体内容 -->
       <div class="layui-body" id="LAY_app_body">
         <div class="layadmin-tabsbody-item layui-show">
-          <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+          <iframe src="home/console" frameborder="0" class="layadmin-iframe"></iframe>
         </div>
       </div>
       

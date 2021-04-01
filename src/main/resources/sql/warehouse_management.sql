@@ -99,6 +99,13 @@ CREATE TABLE `permission_management` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of permission_management
+-- ----------------------------
+INSERT INTO `permission_management` VALUES (1, '超级管理员', '管理所有的管理员', '最高权限');
+INSERT INTO `permission_management` VALUES (2, '管理员', '管理所有员工', '员工管理');
+INSERT INTO `permission_management` VALUES (3, '普通员工', '对自己资料的修改', '去添加入库，出库信息，维护库存');
+
+-- ----------------------------
 -- Table structure for personnel_management
 -- ----------------------------
 DROP TABLE IF EXISTS `personnel_management`;

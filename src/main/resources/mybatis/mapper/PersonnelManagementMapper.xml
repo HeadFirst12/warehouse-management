@@ -10,4 +10,8 @@
     <select id="queryPersonnelManagementNameById" resultType="String" parameterType="Long">
         select * from personnel_management where id = #{id};
     </select>
+
+    <select id="countPersonnelManagement" resultType="Integer">
+        select count(1) from personnel_management;
+    </select>
 </mapper>

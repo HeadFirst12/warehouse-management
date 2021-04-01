@@ -23,30 +23,9 @@
           </div>
 
           <div class="layui-inline">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-block">
-              <input type="text" name="userPassword" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-inline">
-            <label class="layui-form-label">人员级别</label>
-            <div class="layui-input-block">
-              <input type="text" name="permissionLevel" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-inline">
             <label class="layui-form-label">人员姓名</label>
             <div class="layui-input-block">
               <input type="text" name="name" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-inline">
-            <label class="layui-form-label">人员年龄</label>
-            <div class="layui-input-block">
-              <input type="text" name="age" placeholder="请输入" autocomplete="off" class="layui-input">
             </div>
           </div>
 
@@ -58,38 +37,6 @@
           </div>
 
           <div class="layui-inline">
-            <label class="layui-form-label">性别</label>
-            <div class="layui-input-block">
-              <input type="text" name="sex" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-inline">
-            <label class="layui-form-label">加入时间</label>
-            <div class="layui-input-block">
-              <input type="text" name="joinTime" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-          <div class="layui-inline">
-            <label class="layui-form-label">审核状态</label>
-            <div class="layui-input-block">
-              <input type="text" name="authorize" placeholder="请输入" autocomplete="off" class="layui-input">
-            </div>
-          </div>
-
-<!--          <div class="layui-inline">-->
-<!--            <label class="layui-form-label">角色</label>-->
-<!--            <div class="layui-input-block">-->
-<!--              <select name="role">-->
-<!--                <option value="0">超级管理员</option>-->
-<!--                <option value="1">管理员</option>-->
-<!--                <option value="2">普通员工</option>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--          </div>-->
-
-          <div class="layui-inline">
             <button class="layui-btn layuiadmin-btn-admin" lay-submit lay-filter="LAY-user-back-search">
               <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
             </button>
@@ -99,27 +46,31 @@
       </div>
       
       <div class="layui-card-body">
+
         <div style="padding-bottom: 10px;">
           <button class="layui-btn layuiadmin-btn-admin" data-type="batchdel">删除</button>
           <button class="layui-btn layuiadmin-btn-admin" data-type="add">添加</button>
         </div>
         
-        <table id="LAY-user-back-manage" lay-filter="LAY-user-back-manage"></table>  
-<!--        <script type="text/html" id="buttonTpl">-->
-<!--          {{#  if(d.check == true){ }}-->
-<!--            <button class="layui-btn layui-btn-xs">已审核</button>-->
-<!--          {{#  } else { }}-->
-<!--            <button class="layui-btn layui-btn-primary layui-btn-xs">未审核</button>-->
-<!--          {{#  } }}-->
-<!--        </script>-->
-<!--        <script type="text/html" id="table-useradmin-admin">-->
-<!--          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>-->
-<!--          {{#  if(d.role == '超级管理员'){ }}-->
-<!--            <a class="layui-btn layui-btn-disabled layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>-->
-<!--          {{#  } else { }}-->
-<!--            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>-->
-<!--          {{#  } }}-->
-<!--        </script>-->
+        <table id="LAY-user-back-manage" lay-filter="LAY-user-back-manage"></table>
+
+        <script type="text/html" id="buttonTpl">
+          {{#  if(d.authorize == true){ }}
+            <button class="layui-btn layui-btn-xs">已审核</button>
+          {{#  } else { }}
+            <button class="layui-btn layui-btn-primary layui-btn-xs">未审核</button>
+          {{#  } }}
+        </script>
+
+        <script type="text/html" id="table-useradmin-admin">
+          <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+          {{#  if(d.permissionLevel == 0){ }}
+            <a class="layui-btn layui-btn-disabled layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>
+          {{#  } else { }}
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+          {{#  } }}
+        </script>
+
       </div>
     </div>
   </div>

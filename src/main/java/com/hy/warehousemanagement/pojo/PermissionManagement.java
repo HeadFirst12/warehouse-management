@@ -13,7 +13,7 @@ import java.io.Serializable;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class permissionManagement implements Serializable {
+public class PermissionManagement implements Serializable {
 
     private static final long serialVersionUID = 5071169590998718606L;
 

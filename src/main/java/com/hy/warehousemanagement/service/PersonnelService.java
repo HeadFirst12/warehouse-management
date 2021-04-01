@@ -8,4 +8,9 @@ public interface PersonnelService {
      * @return
      */
     LayRequest getPersonnelList();
+
+    /**
+     * 获取管理人员级别列表
+     */
+    LayRequest getPermissionList();
 }

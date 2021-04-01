@@ -17,4 +17,9 @@ public interface PersonnelManagementMapper {
     List<PersonnelManagement> queryPersonnelManagementList();
 
     String queryPersonnelManagementNameById(Long id);
+
+    /**
+     * 统计人员总数
+     */
+    Integer countPersonnelManagement();
 }

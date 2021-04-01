@@ -21,4 +21,12 @@ public class PersonnelController {
         LayRequest layRequest = personnelService.getPersonnelList();
         return layRequest;
     }
+
+    @RequestMapping("/user/administrators/list/get-permission-list")
+    @ResponseBody
+    public LayRequest getPermissionList() {
+        LayRequest layRequest = personnelService.getPersonnelList();
+        return layRequest;
+    }
+
 }

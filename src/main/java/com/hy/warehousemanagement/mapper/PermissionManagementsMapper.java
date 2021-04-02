@@ -13,7 +13,7 @@ public interface PermissionManagementsMapper {
      * 查询员工级别列表
      * @return
      */
-    List<PermissionManagement> getPermissionManagementList();
+    List<PermissionManagement> queryPermissionManagementList();
 
     /**
      * 统计员工级别总数

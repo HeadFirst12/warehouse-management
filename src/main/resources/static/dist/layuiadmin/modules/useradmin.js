@@ -99,7 +99,14 @@
                 minWidth: 80,
                 align: "center"
             },
-            {title: "操作", width: 150, align: "center", fixed: "right", toolbar: "#table-useradmin-admin"}]],
+            {
+                title: "操作",
+                width: 150,
+                align: "center",
+                fixed: "right",
+                toolbar: "#table-useradmin-admin"
+            }
+            ]],
         text: "对不起，加载出现异常！"
     }), i.on("tool(LAY-user-back-manage)", function (e) {
         e.data;
@@ -129,7 +136,7 @@
         }
     }), i.render({
         elem: "#LAY-user-back-role",
-        url: layui.setter.base + "json/useradmin/role.js",
+        url: "/user/administrators/list/get-permission-list",
         cols: [[
             {type: "checkbox", fixed: "left"},
             {

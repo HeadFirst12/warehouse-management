@@ -12,7 +12,7 @@ import com.hy.warehousemanagement.model.SystemErrorCodeEnum;
 import com.hy.warehousemanagement.pojo.PermissionManagement;
 import com.hy.warehousemanagement.pojo.PersonnelManagement;
 import com.hy.warehousemanagement.service.PersonnelService;
-import com.hy.warehousemanagement.untils.TimesUntil;
+import com.hy.warehousemanagement.utils.TimesUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -56,7 +56,7 @@ public class PersonnelServiceImpl implements PersonnelService {
             for (JSONObject personnelManagementJSON : personnelManagementJSONArray) {
 
                 //时间格式转化
-                String jonsTime = TimesUntil.DateToStringFormat(personnelManagementJSON.getDate(Constant.JOIN_TIME), TimesUntil.SHORT_DATE_FORMAT);
+                String jonsTime = TimesUtil.DateToStringFormat(personnelManagementJSON.getDate(Constant.JOIN_TIME), TimesUtil.SHORT_DATE_FORMAT);
                 personnelManagementJSON.put(Constant.JOIN_TIME, jonsTime);
 
                 //人员级别映射

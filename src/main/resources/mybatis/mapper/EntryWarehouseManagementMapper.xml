@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.warehousemanagement.mapper.EntryWarehouseManagementMapper">
+    <select id="queryEntryWarehouseList" resultType="EntryWarehouseManagement">
+        select * from entry_warehouse_management;
+    </select>
+
+    <select id="countEntryWarehouseNumber" resultType="Integer">
+        select count(1) from entry_warehouse_management;
+    </select>
+
+    <insert id="addEntryWarehouse" parameterType="EntryWarehouseManagement">
+        INSERT INTO
+        `entry_warehouse_management`(`entry_order_id`, `entry_goods_id`, `entry_goods_name`, `entry_goods_number`, `entry_goods_time`, `before_entry_goods_number`, `after_entry_goods_number`, `operator_id`, `create_time`)
+        VALUES
+        (#{entryOrderId}, #{entryGoodsId}, #{entryGoodsName}, #{entryGoodsNumber}, NOW(), #{beforeEntryGoodsNumber}, #{afterEntryGoodsNumber}, #{operatorId}, NOW());
+    </insert>
+
+</mapper>

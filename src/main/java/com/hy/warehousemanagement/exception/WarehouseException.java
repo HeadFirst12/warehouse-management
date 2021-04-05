@@ -11,5 +11,4 @@ public class WarehouseException extends RuntimeException{
     public WarehouseException(SystemErrorCodeEnum systemErrorCodeEnum) {
         super(systemErrorCodeEnum.getErrorCode()+ Constant.Separator + systemErrorCodeEnum.getErrorDesc());
     }
-
 }

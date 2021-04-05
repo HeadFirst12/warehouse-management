@@ -46,11 +46,17 @@ public class MvcConfig implements WebMvcConfigurer {
         //入库列表
         registry.addViewController("/app/content/entrylist").setViewName("views/app/content/entrylist");
 
-        //商品查询
-        registry.addViewController("/app/content/querylist").setViewName("views/app/content/querylist");
+        //库存管理
+        registry.addViewController("/app/content/goodslist").setViewName("views/app/content/goodslist");
 
         //库存日志列表
         registry.addViewController("/app/content/loglist").setViewName("views/app/content/loglist");
+
+        //添加入库日志编辑页面
+        registry.addViewController("/app/workorder/entrylistform").setViewName("views/app/workorder/entrylistform");
+
+        //添加库存编辑页面
+        registry.addViewController("/app/workorder/addgoodsform").setViewName("views/app/workorder/addgoodsform");
 
     }
 

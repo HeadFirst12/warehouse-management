@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.warehousemanagement.mapper.GoodsManagementMapper">
+    <select id="queryGoodsList" resultType="GoodsManagement">
+        select * from goods_management;
+    </select>
+
+    <select id="countGoodsNumber" resultType="Integer">
+        select count(1) from goods_management;
+    </select>
+
+    <insert id="insertGoods" parameterType="GoodsManagement">
+        INSERT INTO
+        `goods_management`(`goods_name`, `goods_number`, `last_operator_id`, `quantity_ceiling`, `quantity_floor`, `goods_status_id`, `create_time`, `update_time`)
+        VALUES
+        (#{goodsName}, #{goodsNumber}, #{lastOperatorId}, #{quantityCeiling}, #{quantityFloor}, #{goodsStatusId}, NOW(), NOW());
+    </insert>
+
+    <select id="getGoodsManagementById" resultType="GoodsManagement">
+        select * from  goods_management where goods_id = #{goodsId};
+    </select>
+</mapper>

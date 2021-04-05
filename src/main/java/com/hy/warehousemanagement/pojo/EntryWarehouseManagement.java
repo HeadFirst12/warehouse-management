@@ -19,9 +19,11 @@ public class EntryWarehouseManagement implements Serializable {
     private static final long serialVersionUID = 3394769242441837312L;
         
     //入库主键
-    private Long entryGoodsId;
+    private Long id;
     //入库订单号
     private String entryOrderId;
+    //入库商品编号
+    private Long entryGoodsId;
     //入库商品名
     private String entryGoodsName;
     //入库商品数量
@@ -36,7 +38,4 @@ public class EntryWarehouseManagement implements Serializable {
     private Long operatorId;
     //创建时间
     private Date createTime;
-    //修改时间
-    private Date updateTime;
-
 }

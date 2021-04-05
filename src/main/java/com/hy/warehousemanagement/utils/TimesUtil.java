@@ -1,9 +1,9 @@
-package com.hy.warehousemanagement.untils;
+package com.hy.warehousemanagement.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TimesUntil {
+public class TimesUtil {
 
     //24小时时间格式
     public static final String NORMAL_DATE_24_HOUR_FORMAT = "yyyy-MM-dd HH:mm:ss";

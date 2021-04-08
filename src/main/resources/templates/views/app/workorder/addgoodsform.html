@@ -79,7 +79,7 @@
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //请求地址
-        url : "/warehouse/goods-add ",
+        url : "/warehouse/goods-add",
         //数据，json字符串
         data : JSON.stringify(field),
         //请求成功
@@ -94,7 +94,7 @@
       });
 
       //重载表格
-      //parent.layui.table.reload('LAY-app-content-list');
+      parent.layui.table.reload('LAY-warehouse-ware-list');
     });
   })
 </script>

@@ -63,18 +63,11 @@
 
         <table id="LAY-warehouse-ware-list" lay-filter="LAY-warehouse-ware-list"></table>
 
-        <script type="text/html" id="buttonTpl">
-          {{#  if(d.status){ }}
-            <button class="layui-btn layui-btn-xs">已发布</button>
-          {{#  } else { }}
-            <button class="layui-btn layui-btn-primary layui-btn-xs">待修改</button>
-          {{#  } }}
-        </script>
-
         <script type="text/html" id="table-content-list">
           <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
           <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
         </script>
+
       </div>
     </div>
   </div>
@@ -101,23 +94,37 @@
     
     var $ = layui.$, active = {
       batchdel: function(){
-        var checkStatus = table.checkStatus('LAY-app-content-list')
+        var checkStatus = table.checkStatus('LAY-warehouse-ware-list')
         ,checkData = checkStatus.data; //得到选中的数据
 
         if(checkData.length === 0){
           return layer.msg('请选择数据');
         }
-      
+
         layer.confirm('确定删除吗？', function(index) {
           
           //执行 Ajax 后重载
-          /*
-          admin.req({
-            url: 'xxx'
-            //,……
+          $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/warehouse/goods-del",
+            //数据，json字符串
+            data : JSON.stringify(checkData[0]),
+            //请求成功
+            success : function(result) {
+              console.log(result);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+              console.log(e.status);
+              console.log(e.responseText);
+            }
           });
-          */
-          table.reload('LAY-app-content-list');
+
+          table.reload('LAY-warehouse-ware-list');
           layer.msg('已删除');
         });
       },
@@ -132,13 +139,40 @@
           ,yes: function(index, layero){
             //点击确认触发 iframe 内容中的按钮提交
             var submit = layero.find('iframe').contents().find("#LAY-warehouse-add-goods-submit");
-            console.log(submit)
             submit.click();
             layer.close(index)
           }
         }); 
+      },
+    };
+
+    //监听行工具事件
+    table.on('tool(LAY-warehouse-ware-list)', function(obj){
+      var data = obj.data;
+      if(obj.event === 'del'){
+        layer.confirm('真的删除行么', function(index){
+          obj.del();
+          layer.close(index);
+        });
+      } else if(obj.event === 'edit'){
+        console.log(JSON.stringify(data));
+        layer.open({
+          type: 2,
+          title: "编辑库存",
+          content: "/app/work-order/edit-goods-form?goodsId="+data.goodsId,
+          area: ["500px", "480px"],
+          btn: ["确定", "取消"],
+          yes: function (index, layero) {
+            //点击确认触发 iframe 内容中的按钮提交
+            var submit = layero.find('iframe').contents().find("#LAY-warehouse-edit-goods-submit");
+            submit.click();
+            console.log("触发了提交事件");
+            console.log(submit);
+            layer.close(index)
+          }
+        })
       }
-    }; 
+    });
 
     $('.layui-btn.layuiadmin-btn-list').on('click', function(){
       var type = $(this).data('type');

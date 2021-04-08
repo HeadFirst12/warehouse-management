@@ -36,4 +36,18 @@ public interface GoodsManagementMapper {
      * @return
      */
     Integer insertGoods(GoodsManagement goodsManagement);
+
+    /**
+     * 删除货物
+     * @param goodsId
+     * @return
+     */
+    Integer delGoodsManagementById(Long goodsId);
+
+    /**
+     * 编辑货物
+     * @param goodsManagement
+     * @return
+     */
+    Integer updateGoodsManagement(GoodsManagement goodsManagement);
 }

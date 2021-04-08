@@ -98,6 +98,23 @@ public class WareHouseServiceImpl implements WareHouseService {
 
     }
 
+    @Override
+    public void delGoods(GoodsManagement goodsManagement) {
+        Long goodsId = goodsManagement.getGoodsId();
+        Integer delResult =  goodsManagementMapper.delGoodsManagementById(goodsId);
+    }
+
+    @Override
+    public void editGoods(GoodsManagement goodsManagement) {
+        Integer updateResult =  goodsManagementMapper.updateGoodsManagement(goodsManagement);
+    }
+
+    @Override
+    public GoodsManagement getGoodsByGoodsId(Long goodsId) {
+        GoodsManagement goodsManagementById = goodsManagementMapper.getGoodsManagementById(goodsId);
+        return goodsManagementById;
+    }
+
     /**
      * 组装LayRequest对象
      *

@@ -55,8 +55,12 @@ public class MvcConfig implements WebMvcConfigurer {
         //添加入库日志编辑页面
         registry.addViewController("/app/workorder/entrylistform").setViewName("views/app/workorder/entrylistform");
 
-        //添加库存编辑页面
+        //添加库存页面
         registry.addViewController("/app/workorder/addgoodsform").setViewName("views/app/workorder/addgoodsform");
+
+//        //编辑库存页面
+//        registry.addViewController("/app/workorder/editgoodsform").setViewName("views/app/workorder/editgoodsform");
+
 
     }
 

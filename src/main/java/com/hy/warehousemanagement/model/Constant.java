@@ -27,8 +27,7 @@ public class Constant {
     //订单的长度
     public static final Integer ORDER_LENGTH = 20;
 
-
-
+    public static final String GOODS_MANAGEMENT = "goodsManagement";
 
 
 

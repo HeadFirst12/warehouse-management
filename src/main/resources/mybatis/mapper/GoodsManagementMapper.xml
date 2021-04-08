@@ -21,4 +21,56 @@
     <select id="getGoodsManagementById" resultType="GoodsManagement">
         select * from  goods_management where goods_id = #{goodsId};
     </select>
+
+    <update id="updateGoodsManagement" parameterType="GoodsManagement">
+        UPDATE `goods_management`
+        <set>
+            <if test="goodsName != null">
+                `goods_name` = #{goodsName},
+            </if>
+            <if test="goodsNumber != null">
+                `goods_number` = #{goodsNumber},
+            </if>
+            <if test="yesterdayGoodsNumber != null">
+                `yesterday_goods_number` = #{yesterdayGoodsNumber},
+            </if>
+            <if test="lastWeekGoodsNumber != null">
+                `last_week_goods_number` = #{lastWeekGoodsNumber},
+            </if>
+            <if test="lastMonthGoodsNumber != null">
+                `last_month_goods_number` = #{lastMonthGoodsNumber},
+            </if>
+            <if test="lastQuarterGoodsNumber != null">
+                `last_quarter_goods_number` = #{lastQuarterGoodsNumber},
+            </if>
+            <if test="lastYearGoodsNumber != null">
+                `last_year_goods_number` = #{lastYearGoodsNumber},
+            </if>
+            <if test="lastOperatorId != null">
+                `last_operator_id` = #{lastOperatorId},
+            </if>
+            <if test="quantityCeiling != null">
+                `quantity_ceiling` = #{quantityCeiling},
+            </if>
+            <if test="quantityFloor != null">
+                `quantity_floor` = #{quantityFloor},
+            </if>
+            <if test="goodsStatusId != null">
+                `goods_status_id` = #{goodsStatusId},
+            </if>
+            <if test="createTime != null">
+                `create_time` = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime}
+            </if>
+        </set>
+        WHERE `goods_id` = #{goodsId};
+
+    </update>
+
+    <delete id="delGoodsManagementById" parameterType="Long">
+        DELETE FROM goods_management where goods_id = #{goodsId}
+    </delete>
+
 </mapper>

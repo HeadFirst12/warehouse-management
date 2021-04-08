@@ -35,4 +35,23 @@ public interface WareHouseService {
      * @param goodsManagement
      */
     void addGoods(GoodsManagement goodsManagement);
+
+    /**
+     * 删除商品库存
+     * @param goodsManagement
+     */
+    void delGoods(GoodsManagement goodsManagement);
+
+    /**
+     * 编辑库存
+     * @param goodsManagement
+     */
+    void editGoods(GoodsManagement goodsManagement);
+
+    /**
+     * 通过goodsId获取
+     * @param goodsId
+     * @return
+     */
+    GoodsManagement getGoodsByGoodsId(Long goodsId);
 }

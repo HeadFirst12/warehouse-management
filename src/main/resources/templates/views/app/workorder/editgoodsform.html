@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>编辑库存</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../../../../static/dist/layuiadmin/layui/css/layui.css" media="all">
+</head>
+<body>
+
+<div class="layui-form" lay-filter="layuiadmin-form-order" id="layuiadmin-form-order" style="padding: 20px 30px 0 0;">
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">商品编号</label>
+    <div class="layui-input-inline">
+      <input type="text" name="goodsId" lay-verify="required" th:value="${goodsManagement.goodsId}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">商品名</label>
+    <div class="layui-input-inline">
+      <input type="text" name="goodsName" lay-verify="required" th:value="${goodsManagement.goodsName}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">商品数量</label>
+    <div class="layui-input-inline">
+      <input type="text" name="goodsNumber" lay-verify="required" th:value="${goodsManagement.goodsNumber}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">昨天货物数量</label>
+    <div class="layui-input-inline">
+      <input type="text" name="yesterdayGoodsNumber" lay-verify="required" th:value="${goodsManagement.yesterdayGoodsNumber}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">上周货物数量</label>
+    <div class="layui-input-inline">
+      <input type="text" name="lastWeekGoodsNumber" lay-verify="required" th:value="${goodsManagement.lastWeekGoodsNumber}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">上月货物数量</label>
+    <div class="layui-input-inline">
+      <input type="text" name="lastMonthGoodsNumber" lay-verify="required" th:value="${goodsManagement.lastMonthGoodsNumber}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">去年货物数量</label>
+    <div class="layui-input-inline">
+      <input type="text" name="lastYearGoodsNumber" lay-verify="required" th:value="${goodsManagement.lastYearGoodsNumber}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">货物上限</label>
+    <div class="layui-input-inline">
+      <input type="text" name="quantityCeiling" lay-verify="required" th:value="${goodsManagement.quantityCeiling}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <label class="layui-form-label">货物下限</label>
+    <div class="layui-input-inline">
+      <input type="text" name="quantityFloor" lay-verify="required" th:value="${goodsManagement.quantityFloor}" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+
+  <div class="layui-form-item">
+    <input type="button" lay-submit lay-filter="LAY-warehouse-edit-goods-submit" id="LAY-warehouse-edit-goods-submit" value="确认">
+  </div>
+</div>
+
+<script src="../../../../static/dist/layuiadmin/layui/layui.js"></script>
+<script>
+  layui.config({
+    base: '../../../../static/dist/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form'], function(){
+    var $ = layui.$
+            ,form = layui.form;
+
+    //监听提交
+    form.on('submit(LAY-warehouse-edit-goods-submit)', function(data){
+      //获取提交的字段
+      var field = data.field;
+      //先得到当前iframe层的索引
+      var index = parent.layer.getFrameIndex(window.name);
+      console.log(JSON.stringify(field));
+
+      //提交 Ajax 成功后，关闭当前弹层并重载表格
+      $.ajax({
+        //请求方式
+        type : "POST",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //请求地址
+        url : "/warehouse/goods-edit",
+        //数据，json字符串
+        data : JSON.stringify(field),
+        //请求成功
+        success : function(result) {
+          console.log(result);
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+          console.log(e.status);
+          console.log(e.responseText);
+        }
+      });
+
+      //重载表格
+      //parent.layui.table.reload('LAY-app-content-list');
+    });
+  })
+</script>
+</body>
+</html>

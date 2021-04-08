@@ -25,7 +25,7 @@
     <update id="updateGoodsManagement" parameterType="GoodsManagement">
         UPDATE `goods_management`
         <set>
-            <if test="goodsName != null">
+            <if test="goodsName != null and goodsName != ''">
                 `goods_name` = #{goodsName},
             </if>
             <if test="goodsNumber != null">
@@ -72,5 +72,101 @@
     <delete id="delGoodsManagementById" parameterType="Long">
         DELETE FROM goods_management where goods_id = #{goodsId}
     </delete>
+
+    <select id="selectGoodsByGoodsManagement" parameterType="GoodsManagement" resultType="GoodsManagement">
+        select * from goods_management
+        <where>
+            <if test="goodsId != null">
+                `goods_id` = #{goodsId}
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                and `goods_name` like CONCAT('%', #{goodsName}, '%')
+            </if>
+            <if test="goodsNumber != null">
+                and `goods_number` = #{goodsNumber}
+            </if>
+            <if test="yesterdayGoodsNumber != null">
+                and `yesterday_goods_number` = #{yesterdayGoodsNumber}
+            </if>
+            <if test="lastWeekGoodsNumber != null">
+                and `last_week_goods_number` = #{lastWeekGoodsNumber}
+            </if>
+            <if test="lastMonthGoodsNumber != null">
+                and `last_month_goods_number` = #{lastMonthGoodsNumber}
+            </if>
+            <if test="lastQuarterGoodsNumber != null">
+                and `last_quarter_goods_number` = #{lastQuarterGoodsNumber}
+            </if>
+            <if test="lastYearGoodsNumber != null">
+                and `last_year_goods_number` = #{lastYearGoodsNumber}
+            </if>
+            <if test="lastOperatorId != null">
+                and `last_operator_id` = #{lastOperatorId}
+            </if>
+            <if test="quantityCeiling != null">
+                and `quantity_ceiling` = #{quantityCeiling}
+            </if>
+            <if test="quantityFloor != null">
+                and `quantity_floor` = #{quantityFloor}
+            </if>
+            <if test="goodsStatusId != null">
+                and `goods_status_id` = #{goodsStatusId}
+            </if>
+            <if test="createTime != null">
+                and `create_time` = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and `update_time` = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="countGoodsNumberByGoodsManagement" parameterType="GoodsManagement" resultType="Integer">
+        select count(1) from goods_management
+        <where>
+            <if test="goodsId != null">
+                `goods_id` = #{goodsId}
+            </if>
+            <if test="goodsName != null and goodsName != ''">
+                and `goods_name` like CONCAT('%', #{goodsName}, '%')
+            </if>
+            <if test="goodsNumber != null">
+                and `goods_number` = #{goodsNumber}
+            </if>
+            <if test="yesterdayGoodsNumber != null">
+                and `yesterday_goods_number` = #{yesterdayGoodsNumber}
+            </if>
+            <if test="lastWeekGoodsNumber != null">
+                and `last_week_goods_number` = #{lastWeekGoodsNumber}
+            </if>
+            <if test="lastMonthGoodsNumber != null">
+                and `last_month_goods_number` = #{lastMonthGoodsNumber}
+            </if>
+            <if test="lastQuarterGoodsNumber != null">
+                and `last_quarter_goods_number` = #{lastQuarterGoodsNumber}
+            </if>
+            <if test="lastYearGoodsNumber != null">
+                and `last_year_goods_number` = #{lastYearGoodsNumber}
+            </if>
+            <if test="lastOperatorId != null">
+                and `last_operator_id` = #{lastOperatorId}
+            </if>
+            <if test="quantityCeiling != null">
+                and `quantity_ceiling` = #{quantityCeiling}
+            </if>
+            <if test="quantityFloor != null">
+                and `quantity_floor` = #{quantityFloor}
+            </if>
+            <if test="goodsStatusId != null">
+                and `goods_status_id` = #{goodsStatusId}
+            </if>
+            <if test="createTime != null">
+                and `create_time` = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and `update_time` = #{updateTime}
+            </if>
+        </where>
+    </select>
 
 </mapper>

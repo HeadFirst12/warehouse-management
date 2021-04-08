@@ -54,4 +54,11 @@ public interface WareHouseService {
      * @return
      */
     GoodsManagement getGoodsByGoodsId(Long goodsId);
+
+    /**
+     * 多条件查询库存
+     * @param goodsManagement
+     * @return
+     */
+    LayRequest searchGoodsByGoods(GoodsManagement goodsManagement);
 }

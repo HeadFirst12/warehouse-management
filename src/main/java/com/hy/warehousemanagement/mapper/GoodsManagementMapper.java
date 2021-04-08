@@ -50,4 +50,18 @@ public interface GoodsManagementMapper {
      * @return
      */
     Integer updateGoodsManagement(GoodsManagement goodsManagement);
+
+    /**
+     * 多条件查询货物库存
+     * @param goodsManagement
+     * @return
+     */
+    List<GoodsManagement> selectGoodsByGoodsManagement(GoodsManagement goodsManagement);
+
+    /**
+     * 统计多条件查询出来的库存
+     * @param goodsManagement
+     * @return
+     */
+    Integer countGoodsNumberByGoodsManagement(GoodsManagement goodsManagement);
 }

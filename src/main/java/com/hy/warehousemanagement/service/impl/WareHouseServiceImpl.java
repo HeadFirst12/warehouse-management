@@ -115,6 +115,14 @@ public class WareHouseServiceImpl implements WareHouseService {
         return goodsManagementById;
     }
 
+    @Override
+    public LayRequest searchGoodsByGoods(GoodsManagement goodsManagement) {
+        List<GoodsManagement> goodsManagements = goodsManagementMapper.selectGoodsByGoodsManagement(goodsManagement);
+        Integer goodsNumber = goodsManagementMapper.countGoodsNumberByGoodsManagement(goodsManagement);
+        LayRequest layRequest = assembleLayRequest(goodsManagements, goodsNumber);
+        return layRequest;
+    }
+
     /**
      * 组装LayRequest对象
      *

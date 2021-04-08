@@ -71,7 +71,6 @@ public class WarehouseController {
     @PostMapping("/warehouse/goods-edit")
     @ResponseBody
     public void editGoods(@RequestBody GoodsManagement goodsManagement) {
-        System.out.println(goodsManagement);
         wareHouseService.editGoods(goodsManagement);
     }
 
@@ -80,11 +79,19 @@ public class WarehouseController {
      */
     @GetMapping("/app/work-order/edit-goods-form")
     public ModelAndView gotoEditGoodsFormView(Long goodsId) {
-        System.out.println(goodsId);
         GoodsManagement goodsManagement = wareHouseService.getGoodsByGoodsId(goodsId);
         ModelAndView mad = new ModelAndView("/views/app/workorder/editgoodsform");
         mad.addObject(Constant.GOODS_MANAGEMENT,goodsManagement);
         return mad;
     }
 
+    /**
+     * 库存多条件搜索
+     */
+    @RequestMapping("/warehouse/goods-search")
+    @ResponseBody
+    public LayRequest searchGoodsByGoods(GoodsManagement goodsManagement) {
+        LayRequest layRequest = wareHouseService.searchGoodsByGoods(goodsManagement);
+        return layRequest;
+    }
 }

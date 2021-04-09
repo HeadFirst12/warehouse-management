@@ -42,7 +42,7 @@ public interface GoodsManagementMapper {
      * @param goodsId
      * @return
      */
-    Integer delGoodsManagementById(Long goodsId);
+    Integer delGoodsManagementById(String goodsId);
 
     /**
      * 编辑货物
@@ -64,4 +64,11 @@ public interface GoodsManagementMapper {
      * @return
      */
     Integer countGoodsNumberByGoodsManagement(GoodsManagement goodsManagement);
+
+    /**
+     * 通过goodsName查找库存
+     * @param goodsName
+     * @return
+     */
+    GoodsManagement getGoodsManagementByGoodsName(String goodsName);
 }

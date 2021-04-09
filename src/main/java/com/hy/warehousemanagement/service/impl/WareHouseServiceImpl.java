@@ -1,15 +1,14 @@
 package com.hy.warehousemanagement.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hy.warehousemanagement.exception.WarehouseException;
 import com.hy.warehousemanagement.mapper.EntryWarehouseManagementMapper;
 import com.hy.warehousemanagement.mapper.GoodsManagementMapper;
-import com.hy.warehousemanagement.model.Constant;
-import com.hy.warehousemanagement.model.LayRequest;
-import com.hy.warehousemanagement.model.StatusEnum;
-import com.hy.warehousemanagement.model.SystemErrorCodeEnum;
+import com.hy.warehousemanagement.model.*;
 import com.hy.warehousemanagement.pojo.EntryWarehouseManagement;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 import com.hy.warehousemanagement.service.WareHouseService;
+import com.hy.warehousemanagement.utils.AssembleResultUtil;
 import com.hy.warehousemanagement.utils.CreatOrderIdUtil;
 import com.hy.warehousemanagement.utils.GetResultUtil;
 import org.springframework.stereotype.Service;
@@ -31,21 +30,21 @@ public class WareHouseServiceImpl implements WareHouseService {
     private GoodsManagementMapper goodsManagementMapper;
 
     @Override
-    public LayRequest getEntryWarehouseList() {
+    public LayResult getEntryWarehouseList() {
         List<EntryWarehouseManagement> entryWarehouseManagements = entryWarehouseManagementMapper.queryEntryWarehouseList();
         Integer countEntryWarehouseNumber = entryWarehouseManagementMapper.countEntryWarehouseNumber();
-        LayRequest<EntryWarehouseManagement> entryWarehouseManagementLayRequest = new LayRequest<>();
+        LayResult<EntryWarehouseManagement> entryWarehouseManagementLayResult = new LayResult<>();
 
-        entryWarehouseManagementLayRequest.setMsg("");
-        entryWarehouseManagementLayRequest.setCount(countEntryWarehouseNumber.toString());
-        entryWarehouseManagementLayRequest.setCode(StatusEnum.CODE_SUCCESS.getCode());
-        entryWarehouseManagementLayRequest.setData(entryWarehouseManagements);
+        entryWarehouseManagementLayResult.setMsg("");
+        entryWarehouseManagementLayResult.setCount(countEntryWarehouseNumber.toString());
+        entryWarehouseManagementLayResult.setCode(StatusEnum.CODE_SUCCESS.getCode());
+        entryWarehouseManagementLayResult.setData(entryWarehouseManagements);
 
-        return entryWarehouseManagementLayRequest;
+        return entryWarehouseManagementLayResult;
     }
 
     @Override
-    public LayRequest countEntryWarehouseNumber() {
+    public LayResult countEntryWarehouseNumber() {
         return null;
     }
 
@@ -71,36 +70,50 @@ public class WareHouseServiceImpl implements WareHouseService {
     }
 
     @Override
-    public LayRequest getWarehouseGoodsList() {
+    public LayResult getWarehouseGoodsList() {
         List<GoodsManagement> goodsManagements = goodsManagementMapper.queryGoodsList();
         Integer goodsNumber = goodsManagementMapper.countGoodsNumber();
-        LayRequest layRequest = assembleLayRequest(goodsManagements, goodsNumber);
-        return layRequest;
+        LayResult layResult = AssembleResultUtil.assembleLayResult(goodsManagements, goodsNumber);
+        return layResult;
     }
 
     @Override
-    public void addGoods(GoodsManagement goodsManagement) {
+    public AjaxResult addGoods(GoodsManagement goodsManagement) {
 
-        GoodsManagement goodsManagementById = goodsManagementMapper.getGoodsManagementById(goodsManagement.getGoodsId());
-        if (goodsManagementById == null) {
-            //库存中不存在该商品需要新增
-            goodsManagement.setLastOperatorId(1L);
-            Integer statusResult = GetResultUtil.getStatusResult(goodsManagement);
-            if (statusResult <= 0) {
-                throw new WarehouseException(SystemErrorCodeEnum.DATA_ERROR);
+        GoodsManagement goodsManagementByGoodsName = goodsManagementMapper.getGoodsManagementByGoodsName(goodsManagement.getGoodsName());
+
+        AjaxResult ajaxResult;
+
+        try {
+            if (goodsManagementByGoodsName == null) {
+                //库存中不存在该商品需要新增
+                goodsManagement.setLastOperatorId(1L);
+                goodsManagement.setGoodsId(CreatOrderIdUtil.getGoodsId());
+                Integer statusResult = GetResultUtil.getStatusResult(goodsManagement);
+                if (statusResult <= 0) {
+                    throw new WarehouseException(SystemErrorCodeEnum.DATA_ERROR);
+                }
+                goodsManagement.setGoodsStatusId(statusResult);
+                Integer insertResult = goodsManagementMapper.insertGoods(goodsManagement);
+
+                ajaxResult = AssembleResultUtil.assembleAjaxResult(insertResult);
+
+            } else {
+                //库存中已经存在不能新增货物
+                throw new WarehouseException(SystemErrorCodeEnum.GOODS_ALREADY_EXISTS);
             }
-            goodsManagement.setGoodsStatusId(statusResult);
-            Integer insertResult = goodsManagementMapper.insertGoods(goodsManagement);
-        } else {
-           //库存中已经存在不能新增货物
-            throw new WarehouseException(SystemErrorCodeEnum.GOODS_ALREADY_EXISTS);
+        } catch (WarehouseException e) {
+            JSONObject exceptionInfoJson = AssembleResultUtil.getExceptionInfo(e.getMessage());
+            ajaxResult = AssembleResultUtil.assembleAjaxResult(exceptionInfoJson);
+            e.printStackTrace();
         }
 
+        return ajaxResult;
     }
 
     @Override
     public void delGoods(GoodsManagement goodsManagement) {
-        Long goodsId = goodsManagement.getGoodsId();
+        String goodsId = goodsManagement.getGoodsId();
         Integer delResult =  goodsManagementMapper.delGoodsManagementById(goodsId);
     }
 
@@ -116,27 +129,12 @@ public class WareHouseServiceImpl implements WareHouseService {
     }
 
     @Override
-    public LayRequest searchGoodsByGoods(GoodsManagement goodsManagement) {
+    public LayResult searchGoodsByGoods(GoodsManagement goodsManagement) {
         List<GoodsManagement> goodsManagements = goodsManagementMapper.selectGoodsByGoodsManagement(goodsManagement);
         Integer goodsNumber = goodsManagementMapper.countGoodsNumberByGoodsManagement(goodsManagement);
-        LayRequest layRequest = assembleLayRequest(goodsManagements, goodsNumber);
-        return layRequest;
+        LayResult layResult = AssembleResultUtil.assembleLayResult(goodsManagements, goodsNumber);
+        return layResult;
     }
 
-    /**
-     * 组装LayRequest对象
-     *
-     * @param list
-     * @return
-     */
-    private LayRequest assembleLayRequest(List list, Integer count) {
-        LayRequest layRequest = new LayRequest();
-        if (list.size() > 0) {
-            layRequest.setCode(StatusEnum.CODE_SUCCESS.getCode());
-            layRequest.setMsg("");
-            layRequest.setCount(count.toString());
-            layRequest.setData(list);
-        }
-        return layRequest;
-    }
+
 }

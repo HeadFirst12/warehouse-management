@@ -6,12 +6,12 @@ import com.hy.warehousemanagement.exception.WarehouseException;
 import com.hy.warehousemanagement.mapper.PermissionManagementsMapper;
 import com.hy.warehousemanagement.mapper.PersonnelManagementMapper;
 import com.hy.warehousemanagement.model.Constant;
-import com.hy.warehousemanagement.model.LayRequest;
-import com.hy.warehousemanagement.model.StatusEnum;
+import com.hy.warehousemanagement.model.LayResult;
 import com.hy.warehousemanagement.model.SystemErrorCodeEnum;
 import com.hy.warehousemanagement.pojo.PermissionManagement;
 import com.hy.warehousemanagement.pojo.PersonnelManagement;
 import com.hy.warehousemanagement.service.PersonnelService;
+import com.hy.warehousemanagement.utils.AssembleResultUtil;
 import com.hy.warehousemanagement.utils.TimesUtil;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +31,7 @@ public class PersonnelServiceImpl implements PersonnelService {
     private PermissionManagementsMapper permissionManagementsMapper;
 
     @Override
-    public LayRequest getPersonnelList() {
+    public LayResult getPersonnelList() {
         //人员列表
         List<PersonnelManagement> personnelManagements;
         //人员总数
@@ -76,12 +76,12 @@ public class PersonnelServiceImpl implements PersonnelService {
 
             }
         }
-        LayRequest layRequest = assembleLayRequest(personnelManagementJSONArray, personnelManagementNumber);
-        return layRequest;
+        LayResult layResult = AssembleResultUtil.assembleLayResult(personnelManagementJSONArray, personnelManagementNumber);
+        return layResult;
     }
 
     @Override
-    public LayRequest getPermissionList() {
+    public LayResult getPermissionList() {
         //级别列表
         List<PermissionManagement> permissionManagements;
         //级别总数
@@ -92,24 +92,7 @@ public class PersonnelServiceImpl implements PersonnelService {
         } catch (Exception e) {
             throw new WarehouseException(SystemErrorCodeEnum.DATABASE_ERROR);
         }
-        LayRequest layRequest = assembleLayRequest(permissionManagements, personnelManagementNumber);
-        return layRequest;
-    }
-
-    /**
-     * 组装LayRequest对象
-     *
-     * @param list
-     * @return
-     */
-    private LayRequest assembleLayRequest(List list, Integer count) {
-        LayRequest layRequest = new LayRequest();
-        if (list.size() > 0) {
-            layRequest.setCode(StatusEnum.CODE_SUCCESS.getCode());
-            layRequest.setMsg("");
-            layRequest.setCount(count.toString());
-            layRequest.setData(list);
-        }
-        return layRequest;
+        LayResult layResult = AssembleResultUtil.assembleLayResult(permissionManagements, personnelManagementNumber);
+        return layResult;
     }
 }

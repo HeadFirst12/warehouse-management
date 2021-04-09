@@ -1,6 +1,6 @@
 package com.hy.warehousemanagement.controller;
 
-import com.hy.warehousemanagement.model.LayRequest;
+import com.hy.warehousemanagement.model.LayResult;
 import com.hy.warehousemanagement.service.PersonnelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,16 +16,16 @@ public class PersonnelController {
 
     @RequestMapping("/user/administrators/list/get-personnel-list")
     @ResponseBody
-    public LayRequest getPersonnelList() {
-        LayRequest layRequest = personnelService.getPersonnelList();
-        return layRequest;
+    public LayResult getPersonnelList() {
+        LayResult layResult = personnelService.getPersonnelList();
+        return layResult;
     }
 
     @RequestMapping("/user/administrators/list/get-permission-list")
     @ResponseBody
-    public LayRequest getPermissionList() {
-        LayRequest layRequest = personnelService.getPermissionList();
-        return layRequest;
+    public LayResult getPermissionList() {
+        LayResult layResult = personnelService.getPermissionList();
+        return layResult;
     }
 
 }

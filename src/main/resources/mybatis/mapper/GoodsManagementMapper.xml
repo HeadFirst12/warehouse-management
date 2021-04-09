@@ -13,18 +13,21 @@
 
     <insert id="insertGoods" parameterType="GoodsManagement">
         INSERT INTO
-        `goods_management`(`goods_name`, `goods_number`, `last_operator_id`, `quantity_ceiling`, `quantity_floor`, `goods_status_id`, `create_time`, `update_time`)
+        `goods_management`(`goods_id`, `goods_name`, `goods_number`, `last_operator_id`, `quantity_ceiling`, `quantity_floor`, `goods_status_id`, `create_time`, `update_time`)
         VALUES
-        (#{goodsName}, #{goodsNumber}, #{lastOperatorId}, #{quantityCeiling}, #{quantityFloor}, #{goodsStatusId}, NOW(), NOW());
+        (#{goodsId}, #{goodsName}, #{goodsNumber}, #{lastOperatorId}, #{quantityCeiling}, #{quantityFloor}, #{goodsStatusId}, NOW(), NOW());
     </insert>
 
-    <select id="getGoodsManagementById" resultType="GoodsManagement">
+    <select id="getGoodsManagementById" parameterType="Integer" resultType="GoodsManagement">
         select * from  goods_management where goods_id = #{goodsId};
     </select>
 
     <update id="updateGoodsManagement" parameterType="GoodsManagement">
         UPDATE `goods_management`
         <set>
+            <if test="goodsId != null and goodsId != ''">
+                `goods_id` = #{goodsId},
+            </if>
             <if test="goodsName != null and goodsName != ''">
                 `goods_name` = #{goodsName},
             </if>
@@ -65,11 +68,11 @@
                 `update_time` = #{updateTime}
             </if>
         </set>
-        WHERE `goods_id` = #{goodsId};
+        WHERE `id` = #{id};
 
     </update>
 
-    <delete id="delGoodsManagementById" parameterType="Long">
+    <delete id="delGoodsManagementById" parameterType="String">
         DELETE FROM goods_management where goods_id = #{goodsId}
     </delete>
 
@@ -169,4 +172,7 @@
         </where>
     </select>
 
+    <select id="getGoodsManagementByGoodsName" parameterType="String" resultType="GoodsManagement">
+        select * from  goods_management where goods_name = #{goodsName};
+    </select>
 </mapper>

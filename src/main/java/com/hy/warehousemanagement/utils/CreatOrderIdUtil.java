@@ -2,10 +2,12 @@ package com.hy.warehousemanagement.utils;
 
 import com.hy.warehousemanagement.exception.WarehouseException;
 import com.hy.warehousemanagement.model.SystemErrorCodeEnum;
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 生成订单号工具类
@@ -56,5 +58,16 @@ public class CreatOrderIdUtil {
             result += randInt;
         }
         return result;
+    }
+
+    /**
+     * 生成库存编码
+     */
+    public static String getGoodsId() {
+        String str = UUID.randomUUID().toString();
+        str = str.replaceAll("-", "");
+        str = str.toUpperCase();
+        str = StringUtils.substring(str,0,22);
+        return str;
     }
 }

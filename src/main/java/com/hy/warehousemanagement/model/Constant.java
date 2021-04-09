@@ -29,7 +29,9 @@ public class Constant {
 
     public static final String GOODS_MANAGEMENT = "goodsManagement";
 
+    public static final String ERR_CODE = "errCode";
 
+    public static final String ERR_DESC = "errDesc";
 
 
 }

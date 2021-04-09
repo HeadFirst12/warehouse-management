@@ -14,7 +14,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class LayRequest<T> {
+public class LayResult<T> {
 
     private String code;
     private String msg;

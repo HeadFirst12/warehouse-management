@@ -3,7 +3,17 @@ package com.hy.warehousemanagement.model;
 public enum StatusEnum {
 
     //layUi表单请求code响应
-    CODE_SUCCESS("0","成功");
+    CODE_SUCCESS("0","成功"),
+
+    AJAX_CODE_SUCCESS("00000000","通讯成功"),
+
+    AJAX_CODE_FAIL("99999999","通讯失败"),
+
+    AJAX_STATUS_SUCCESS("09","业务成功"),
+
+    AJAX_STATUS_FAIL("10","业务失败"),
+
+    AJAX_STATUS_IN_PROCESS("01","业务超时");
 
     private String code;
 

@@ -1,6 +1,7 @@
 package com.hy.warehousemanagement.service;
 
-import com.hy.warehousemanagement.model.LayRequest;
+import com.hy.warehousemanagement.model.AjaxResult;
+import com.hy.warehousemanagement.model.LayResult;
 import com.hy.warehousemanagement.pojo.EntryWarehouseManagement;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 
@@ -10,13 +11,13 @@ public interface WareHouseService {
      * 获取出库日志列表
      * @return
      */
-    LayRequest getEntryWarehouseList();
+    LayResult getEntryWarehouseList();
 
     /**
      * 获取出库日志总数
      * @return
      */
-    LayRequest countEntryWarehouseNumber();
+    LayResult countEntryWarehouseNumber();
 
     /**
      * 添加入库日志
@@ -28,13 +29,14 @@ public interface WareHouseService {
      * 获取库存列表
      * @return
      */
-    LayRequest getWarehouseGoodsList();
+    LayResult getWarehouseGoodsList();
 
     /**
      * 添加商品库存
      * @param goodsManagement
+     * @return
      */
-    void addGoods(GoodsManagement goodsManagement);
+    AjaxResult addGoods(GoodsManagement goodsManagement);
 
     /**
      * 删除商品库存
@@ -60,5 +62,5 @@ public interface WareHouseService {
      * @param goodsManagement
      * @return
      */
-    LayRequest searchGoodsByGoods(GoodsManagement goodsManagement);
+    LayResult searchGoodsByGoods(GoodsManagement goodsManagement);
 }

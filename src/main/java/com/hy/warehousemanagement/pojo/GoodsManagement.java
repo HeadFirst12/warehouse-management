@@ -19,7 +19,9 @@ public class GoodsManagement implements Serializable {
     private static final long serialVersionUID = -7341281593878953146L;
         
     //货物主键
-    private Long goodsId;
+    private Long id;
+    //货物编码
+    private String goodsId;
     //货物名字
     private String goodsName;
     //货物数量

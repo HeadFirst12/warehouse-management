@@ -1,7 +1,8 @@
 package com.hy.warehousemanagement.controller;
 
+import com.hy.warehousemanagement.model.AjaxResult;
 import com.hy.warehousemanagement.model.Constant;
-import com.hy.warehousemanagement.model.LayRequest;
+import com.hy.warehousemanagement.model.LayResult;
 import com.hy.warehousemanagement.pojo.EntryWarehouseManagement;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 import com.hy.warehousemanagement.service.WareHouseService;
@@ -23,8 +24,8 @@ public class WarehouseController {
      */
     @RequestMapping("/app/content/get-out-warehouse-list")
     @ResponseBody
-    public LayRequest getOutWarehouseList() {
-        LayRequest entryWarehouseList = wareHouseService.getEntryWarehouseList();
+    public LayResult getOutWarehouseList() {
+        LayResult entryWarehouseList = wareHouseService.getEntryWarehouseList();
         return entryWarehouseList;
     }
 
@@ -42,9 +43,9 @@ public class WarehouseController {
      */
     @RequestMapping("/warehouse/goods-list")
     @ResponseBody
-    public LayRequest getWarehouseWareList() {
-        LayRequest layRequest = wareHouseService.getWarehouseGoodsList();
-        return layRequest;
+    public LayResult getWarehouseWareList() {
+        LayResult layResult = wareHouseService.getWarehouseGoodsList();
+        return layResult;
     }
 
     /**
@@ -52,8 +53,9 @@ public class WarehouseController {
      */
     @PostMapping("/warehouse/goods-add")
     @ResponseBody
-    public void goodsAdd(@RequestBody GoodsManagement goodsManagement) {
-        wareHouseService.addGoods(goodsManagement);
+    public AjaxResult goodsAdd(@RequestBody GoodsManagement goodsManagement) {
+        AjaxResult ajaxResult = wareHouseService.addGoods(goodsManagement);
+        return ajaxResult;
     }
 
     /**
@@ -90,8 +92,8 @@ public class WarehouseController {
      */
     @RequestMapping("/warehouse/goods-search")
     @ResponseBody
-    public LayRequest searchGoodsByGoods(GoodsManagement goodsManagement) {
-        LayRequest layRequest = wareHouseService.searchGoodsByGoods(goodsManagement);
-        return layRequest;
+    public LayResult searchGoodsByGoods(GoodsManagement goodsManagement) {
+        LayResult layResult = wareHouseService.searchGoodsByGoods(goodsManagement);
+        return layResult;
     }
 }

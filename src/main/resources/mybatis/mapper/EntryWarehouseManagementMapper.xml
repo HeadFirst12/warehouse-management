@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.warehousemanagement.mapper.EntryWarehouseManagementMapper">
     <select id="queryEntryWarehouseList" resultType="EntryWarehouseManagement">
-        select * from entry_warehouse_management;
+        select * from entry_warehouse_management limit #{beginIndex},#{showNumber};
     </select>
 
     <select id="countEntryWarehouseNumber" resultType="Integer">
@@ -17,5 +17,42 @@
         VALUES
         (#{entryOrderId}, #{entryGoodsId}, #{entryGoodsName}, #{entryGoodsNumber}, NOW(), #{beforeEntryGoodsNumber}, #{afterEntryGoodsNumber}, #{operatorId}, NOW());
     </insert>
+
+    <select id="selectEntryGoodsByEntryGoods" resultType="EntryWarehouseManagement">
+        select * from entry_warehouse_management
+        <where>
+            <if test="entryWarehouse.id != null">
+                id = #{entryWarehouse.id}
+            </if>
+            <if test="entryWarehouse.entryOrderId != null and entryWarehouse.entryOrderId != ''">
+                and entry_order_id = #{entryWarehouse.entryOrderId}
+            </if>
+            <if test="entryWarehouse.entryGoodsId != null and entryWarehouse.entryGoodsId != ''">
+                and entry_goods_id = #{entryWarehouse.entryGoodsId}
+            </if>
+            <if test="entryWarehouse.entryGoodsName != null and entryWarehouse.entryGoodsName != ''">
+                and entry_goods_name = #{entryWarehouse.entryGoodsName}
+            </if>
+            <if test="entryWarehouse.entryGoodsNumber != null">
+                and entry_goods_number = #{entryWarehouse.entryGoodsNumber}
+            </if>
+            <if test="entryWarehouse.entryGoodsTime != null">
+                and entry_goods_time = #{entryWarehouse.entryGoodsTime}
+            </if>
+            <if test="entryWarehouse.beforeEntryGoodsNumber != null">
+                and before_entry_goods_number = #{entryWarehouse.beforeEntryGoodsNumber}
+            </if>
+            <if test="entryWarehouse.afterEntryGoodsNumber != null">
+                and after_entry_goods_number = #{entryWarehouse.afterEntryGoodsNumber}
+            </if>
+            <if test="entryWarehouse.operatorId != null">
+                and operator_id = #{entryWarehouse.operatorId}
+            </if>
+            <if test="entryWarehouse.createTime != null">
+                and create_time = #{entryWarehouse.createTime}
+            </if>
+        </where>
+        limit #{page.beginIndex},#{page.showNumber};
+    </select>
 
 </mapper>

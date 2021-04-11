@@ -18,8 +18,10 @@ public class OutWarehouseManagement implements Serializable {
 
     private static final long serialVersionUID = 8871196140216257477L;
 
-    //出货主键
-    private Long outGoodsId;
+    //出库日志主键
+    private Long id;
+    //出货商品编号
+    private String outGoodsId;
     //出库订单号
     private String outOrderId;
     //出货商品名

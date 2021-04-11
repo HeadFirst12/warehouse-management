@@ -23,7 +23,7 @@ public class EntryWarehouseManagement implements Serializable {
     //入库订单号
     private String entryOrderId;
     //入库商品编号
-    private Long entryGoodsId;
+    private String entryGoodsId;
     //入库商品名
     private String entryGoodsName;
     //入库商品数量

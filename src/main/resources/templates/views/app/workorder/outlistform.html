@@ -15,19 +15,19 @@
   <div class="layui-form-item">
     <label class="layui-form-label">商品编号</label>
     <div class="layui-input-inline">
-      <input type="text" name="entryGoodsId" lay-verify="required" placeholder="请输入商品编号" autocomplete="off" class="layui-input">
+      <input type="text" name="outGoodsId" lay-verify="required" placeholder="请输入商品编号" autocomplete="off" class="layui-input">
     </div>
   </div>
 
   <div class="layui-form-item">
     <label class="layui-form-label">商品数量</label>
     <div class="layui-input-inline">
-      <input type="text" name="entryGoodsNumber" lay-verify="required" placeholder="请输入商品数量" autocomplete="off" class="layui-input">
+      <input type="text" name="outGoodsNumber" lay-verify="required" placeholder="请输入商品数量" autocomplete="off" class="layui-input">
     </div>
   </div>
 
   <div class="layui-form-item layui-hide">
-    <input type="button" lay-submit lay-filter="LAY-app-workorder-submit" id="LAY-app-workorder-submit" value="确认">
+    <input type="button" lay-submit lay-filter="LAY-app-out-goods-submit" id="LAY-app-out-goods-submit" value="确认">
   </div>
 </div>
 
@@ -42,12 +42,11 @@
             ,form = layui.form;
 
     //监听提交
-    form.on('submit(LAY-app-workorder-submit)', function(data){
+    form.on('submit(LAY-app-out-goods-submit)', function(data){
       //获取提交的字段
       var field = data.field;
       //先得到当前iframe层的索引
       var index = parent.layer.getFrameIndex(window.name);
-
       //提交 Ajax 成功后，关闭当前弹层并重载表格
       $.ajax({
         //请求方式
@@ -55,7 +54,7 @@
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //请求地址
-        url : "/warehouse/entry-warehouse-add",
+        url : "/warehouse/out-warehouse-add",
         //数据，json字符串
         data : JSON.stringify(field),
         //请求成功
@@ -79,7 +78,7 @@
       });
 
       //重载表格
-      parent.layui.table.reload('LAY-app-content-list');
+      parent.layui.table.reload('LAY-app-out-goods-lis');
     });
   })
 </script>

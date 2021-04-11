@@ -14,4 +14,44 @@
     <select id="countPersonnelManagement" resultType="Integer">
         select count(1) from personnel_management;
     </select>
+
+    <select id="getPersonnelManagementById" parameterType="Long" resultType="PersonnelManagement">
+        select * from   personnel_management where id = #{id}
+    </select>
+
+    <select id="getPersonnelManagementByPersonnel" parameterType="PersonnelManagement" resultType="PersonnelManagement">
+        select * from personnel_management
+        <where>
+            <if test="id != null">
+                `id` = #{id}
+            </if>
+            <if test="userName != null and userName != ''">
+                and `user_name` = #{userName}
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                and `user_password` = #{userPassword}
+            </if>
+            <if test="permissionLevel != null">
+                and `permission_level` = #{permissionLevel}
+            </if>
+            <if test="name != null and name != ''">
+                `name` = #{name}
+            </if>
+            <if test="age != null">
+                and `age` = #{age}
+            </if>
+            <if test="tel != null and tel != ''">
+                and `tel` = #{tel}
+            </if>
+            <if test="sex != null">
+                and `sex` = #{sex}
+            </if>
+            <if test="joinTime != null">
+                and `join_time` = #{joinTime}
+            </if>
+            <if test="authorize != null">
+                and `authorize` = #{authorize}
+            </if>
+        </where>
+    </select>
 </mapper>

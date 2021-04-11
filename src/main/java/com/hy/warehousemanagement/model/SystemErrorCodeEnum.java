@@ -14,6 +14,16 @@ public enum SystemErrorCodeEnum {
     ,GOODS_ALREADY_EXISTS("C03003","货物商品名已经存在")
 
     ,SYSTEM_ERROR("A01001","系统异常")
+
+    ,UPDATE_GOODS_ERROR("C03004","更新库存数量未成功")
+
+    ,GOODS_DATA_WRONGFUL("C03005","库存表中的数据不合法或前段传输的数据不合法，系统拒绝更新")
+
+    ,UPDATE_GOODS_NUMBER_TOO_MUCH("C03006","更新的数据超过上限50%以上，系统拒绝更新")
+
+    ,UPDATE_GOODS_NUMBER_TOO_LITTLE("C03007","更新的数据不足下限50%以下，系统拒绝更新")
+
+    ,UPDATE_GOODS_FLOOR_MORE_THAN_CEILING("C03007","下限设置超过上限，不允许操作");
     ;
 
 

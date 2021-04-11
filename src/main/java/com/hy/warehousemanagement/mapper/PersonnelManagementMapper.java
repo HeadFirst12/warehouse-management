@@ -22,4 +22,18 @@ public interface PersonnelManagementMapper {
      * 统计人员总数
      */
     Integer countPersonnelManagement();
+
+    /**
+     * 通过Id获取人员信息
+     * @param id
+     * @return
+     */
+    PersonnelManagement getPersonnelManagementById(Long id);
+
+    /**
+     * 通过personnelManagement中有些信息获取人员信息
+     * @param personnelManagement
+     * @return
+     */
+    PersonnelManagement getPersonnelManagementByPersonnel(PersonnelManagement personnelManagement);
 }

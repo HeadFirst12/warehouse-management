@@ -13,6 +13,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
+
         //首页路径
         registry.addViewController("/").setViewName("views/index");
 
@@ -20,12 +21,12 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/home/console").setViewName("views/home/console");
 
         //用户基本资料修改
-        registry.addViewController("/set/user/info").setViewName("views/set/user/info");
+        registry.addViewController("/set/info").setViewName("views/set/info");
 
         //用户密码修改
-        registry.addViewController("/set/user/password").setViewName("views/set/user/password");
+        registry.addViewController("/set/password").setViewName("views/set/password");
 
-        //退出登录
+        //用户登录页面
         registry.addViewController("/user/login").setViewName("views/user/login");
 
         //消息中心
@@ -46,14 +47,17 @@ public class MvcConfig implements WebMvcConfigurer {
         //入库列表
         registry.addViewController("/app/content/entrylist").setViewName("views/app/content/entrylist");
 
+        //添加出库日志编辑页面
+        registry.addViewController("/app/workorder/outlistform").setViewName("views/app/workorder/outlistform");
+
+        //添加入库日志编辑页面
+        registry.addViewController("/app/workorder/entrylistform").setViewName("views/app/workorder/entrylistform");
+
         //库存管理
         registry.addViewController("/app/content/goodslist").setViewName("views/app/content/goodslist");
 
         //库存日志列表
         registry.addViewController("/app/content/loglist").setViewName("views/app/content/loglist");
-
-        //添加入库日志编辑页面
-        registry.addViewController("/app/workorder/entrylistform").setViewName("views/app/workorder/entrylistform");
 
         //添加库存页面
         registry.addViewController("/app/workorder/addgoodsform").setViewName("views/app/workorder/addgoodsform");

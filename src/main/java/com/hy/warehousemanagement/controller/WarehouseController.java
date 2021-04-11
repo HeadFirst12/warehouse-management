@@ -2,9 +2,11 @@ package com.hy.warehousemanagement.controller;
 
 import com.hy.warehousemanagement.model.AjaxResult;
 import com.hy.warehousemanagement.model.Constant;
+import com.hy.warehousemanagement.model.LayRequest;
 import com.hy.warehousemanagement.model.LayResult;
 import com.hy.warehousemanagement.pojo.EntryWarehouseManagement;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
+import com.hy.warehousemanagement.pojo.OutWarehouseManagement;
 import com.hy.warehousemanagement.service.WareHouseService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +24,10 @@ public class WarehouseController {
      * 获取入库日志列表
      * @return
      */
-    @RequestMapping("/app/content/get-out-warehouse-list")
+    @RequestMapping("/app/content/get-entry-warehouse-list")
     @ResponseBody
-    public LayResult getOutWarehouseList() {
-        LayResult entryWarehouseList = wareHouseService.getEntryWarehouseList();
+    public LayResult getEntryWarehouseList(LayRequest layRequest) {
+        LayResult entryWarehouseList = wareHouseService.getEntryWarehouseList(layRequest);
         return entryWarehouseList;
     }
 
@@ -34,17 +36,60 @@ public class WarehouseController {
      */
     @PostMapping("/warehouse/entry-warehouse-add")
     @ResponseBody
-    public void entryWarehouseAdd(@RequestBody EntryWarehouseManagement entryWarehouseManagement) {
-        wareHouseService.addEntryWarehouse(entryWarehouseManagement);
+    public AjaxResult WarehouseAdd(@RequestBody EntryWarehouseManagement entryWarehouseManagement) {
+        AjaxResult ajaxResult = wareHouseService.addEntryWarehouse(entryWarehouseManagement);
+        return ajaxResult;
     }
+
+    /**
+     * 入库多条件搜索
+     */
+    @RequestMapping("/warehouse/entry-goods-search")
+    @ResponseBody
+    public LayResult searchEntryGoodsByGoods(EntryWarehouseManagement entryWarehouseManagement,LayRequest layRequest) {
+        LayResult layResult = wareHouseService.searchEntryGoodsByGoods(entryWarehouseManagement,layRequest);
+        return layResult;
+    }
+
+    /**
+     * 获取出库日志列表
+     * @return
+     */
+    @RequestMapping("/app/content/get-out-warehouse-list")
+    @ResponseBody
+    public LayResult getOutWarehouseList(LayRequest layRequest) {
+        LayResult OutWarehouseList = wareHouseService.getOutWarehouseList(layRequest);
+        return OutWarehouseList;
+    }
+
+    /**
+     * 添加入库日志
+     */
+    @PostMapping("/warehouse/out-warehouse-add")
+    @ResponseBody
+    public AjaxResult OutWarehouseAdd(@RequestBody OutWarehouseManagement outWarehouseManagement) {
+        AjaxResult ajaxResult = wareHouseService.addOutWarehouse(outWarehouseManagement);
+        return ajaxResult;
+    }
+
+    /**
+     * 入库多条件搜索
+     */
+    @RequestMapping("/warehouse/out-goods-search")
+    @ResponseBody
+    public LayResult searchOutGoodsByGoods(OutWarehouseManagement outWarehouseManagement,LayRequest layRequest) {
+        LayResult layResult = wareHouseService.searchOutGoodsByOutGoods(outWarehouseManagement,layRequest);
+        return layResult;
+    }
+
 
     /**
      * 获取库存列表
      */
     @RequestMapping("/warehouse/goods-list")
     @ResponseBody
-    public LayResult getWarehouseWareList() {
-        LayResult layResult = wareHouseService.getWarehouseGoodsList();
+    public LayResult getWarehouseWareList(LayRequest layRequest) {
+        LayResult layResult = wareHouseService.getWarehouseGoodsList(layRequest);
         return layResult;
     }
 
@@ -63,8 +108,8 @@ public class WarehouseController {
      */
     @PostMapping("/warehouse/goods-del")
     @ResponseBody
-    public void goodsDel(@RequestBody GoodsManagement goodsManagement) {
-        wareHouseService.delGoods(goodsManagement);
+    public AjaxResult goodsDel(@RequestBody GoodsManagement goodsManagement) {
+        return wareHouseService.delGoods(goodsManagement);
     }
 
     /**
@@ -72,15 +117,15 @@ public class WarehouseController {
      */
     @PostMapping("/warehouse/goods-edit")
     @ResponseBody
-    public void editGoods(@RequestBody GoodsManagement goodsManagement) {
-        wareHouseService.editGoods(goodsManagement);
+    public AjaxResult editGoods(@RequestBody GoodsManagement goodsManagement) {
+        return wareHouseService.editGoods(goodsManagement);
     }
 
     /**
      * 跳转到库存页面并回显数据
      */
     @GetMapping("/app/work-order/edit-goods-form")
-    public ModelAndView gotoEditGoodsFormView(Long goodsId) {
+    public ModelAndView gotoEditGoodsFormView(String goodsId) {
         GoodsManagement goodsManagement = wareHouseService.getGoodsByGoodsId(goodsId);
         ModelAndView mad = new ModelAndView("/views/app/workorder/editgoodsform");
         mad.addObject(Constant.GOODS_MANAGEMENT,goodsManagement);
@@ -92,8 +137,8 @@ public class WarehouseController {
      */
     @RequestMapping("/warehouse/goods-search")
     @ResponseBody
-    public LayResult searchGoodsByGoods(GoodsManagement goodsManagement) {
-        LayResult layResult = wareHouseService.searchGoodsByGoods(goodsManagement);
+    public LayResult searchGoodsByGoods(GoodsManagement goodsManagement,LayRequest layRequest) {
+        LayResult layResult = wareHouseService.searchGoodsByGoods(goodsManagement,layRequest);
         return layResult;
     }
 }

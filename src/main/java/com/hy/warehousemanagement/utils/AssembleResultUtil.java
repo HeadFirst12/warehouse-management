@@ -32,14 +32,16 @@ public class AssembleResultUtil {
         return ajaxResult;
     }
 
-    public static AjaxResult assembleAjaxResult(JSONObject jsonObject) {
+    public static AjaxResult assembleAjaxResult(String message) {
+        JSONObject exceptionInfoJson = AssembleResultUtil.getExceptionInfo(message);
         AjaxResult ajaxResult = new AjaxResult();
         ajaxResult.setCode(StatusEnum.AJAX_CODE_SUCCESS.getCode());
         ajaxResult.setStatus(StatusEnum.AJAX_STATUS_FAIL.getCode());
-        ajaxResult.setErrCode(jsonObject.getString(Constant.ERR_CODE));
-        ajaxResult.setErrDesc(jsonObject.getString(Constant.ERR_DESC));
+        ajaxResult.setErrCode(exceptionInfoJson.getString(Constant.ERR_CODE));
+        ajaxResult.setErrDesc(exceptionInfoJson.getString(Constant.ERR_DESC));
         return ajaxResult;
     }
+
 
     /**
      * 组装LayRequest对象
@@ -49,9 +51,11 @@ public class AssembleResultUtil {
      */
     public static LayResult assembleLayResult(List list, Integer count) {
         LayResult layResult = new LayResult();
-        if (list.size() > 0) {
-            layResult.setCode(StatusEnum.CODE_SUCCESS.getCode());
-            layResult.setMsg(StringUtils.EMPTY);
+        layResult.setCode(StatusEnum.CODE_SUCCESS.getCode());
+        layResult.setMsg(StringUtils.EMPTY);
+        layResult.setCount(StringUtils.EMPTY);
+        layResult.setData(null);
+        if (list != null) {
             layResult.setCount(count.toString());
             layResult.setData(list);
         }

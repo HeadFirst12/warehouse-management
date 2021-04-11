@@ -15,7 +15,7 @@
   <div class="layui-form-item">
     <label class="layui-form-label">商品编号</label>
     <div class="layui-input-inline">
-      <input type="text" name="goodsId" lay-verify="required" th:value="${goodsManagement.goodsId}" autocomplete="off" class="layui-input">
+      <input type="text" name="goodsId" lay-verify="required" th:value="${goodsManagement.goodsId}" autocomplete="off" class="layui-input layui-btn-disabled">
     </div>
   </div>
 
@@ -96,7 +96,7 @@
       var field = data.field;
       //先得到当前iframe层的索引
       var index = parent.layer.getFrameIndex(window.name);
-
+      field.lastOperatorId = layui.data('layuiAdmin').access_token;
       //提交 Ajax 成功后，关闭当前弹层并重载表格
       $.ajax({
         //请求方式

@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.warehousemanagement.mapper.GoodsManagementMapper">
-    <select id="queryGoodsList" resultType="GoodsManagement">
-        select * from goods_management;
+    <select id="queryGoodsList" resultType="GoodsManagement" parameterType="com.hy.warehousemanagement.model.Page">
+        select * from goods_management limit #{beginIndex},#{showNumber};
     </select>
 
     <select id="countGoodsNumber" resultType="Integer">
@@ -18,16 +18,13 @@
         (#{goodsId}, #{goodsName}, #{goodsNumber}, #{lastOperatorId}, #{quantityCeiling}, #{quantityFloor}, #{goodsStatusId}, NOW(), NOW());
     </insert>
 
-    <select id="getGoodsManagementById" parameterType="Integer" resultType="GoodsManagement">
+    <select id="getGoodsManagementById" parameterType="String" resultType="GoodsManagement">
         select * from  goods_management where goods_id = #{goodsId};
     </select>
 
     <update id="updateGoodsManagement" parameterType="GoodsManagement">
         UPDATE `goods_management`
         <set>
-            <if test="goodsId != null and goodsId != ''">
-                `goods_id` = #{goodsId},
-            </if>
             <if test="goodsName != null and goodsName != ''">
                 `goods_name` = #{goodsName},
             </if>
@@ -68,7 +65,7 @@
                 `update_time` = #{updateTime}
             </if>
         </set>
-        WHERE `id` = #{id};
+        WHERE `goods_id` = #{goodsId}
 
     </update>
 
@@ -76,58 +73,59 @@
         DELETE FROM goods_management where goods_id = #{goodsId}
     </delete>
 
-    <select id="selectGoodsByGoodsManagement" parameterType="GoodsManagement" resultType="GoodsManagement">
+    <select id="selectGoodsByGoodsManagement" resultType="GoodsManagement">
         select * from goods_management
         <where>
-            <if test="goodsId != null">
-                `goods_id` = #{goodsId}
+            <if test="goodsManagement.goodsId != null and goodsManagement.goodsId != ''">
+                `goods_id` = #{goodsManagement.goodsId}
             </if>
-            <if test="goodsName != null and goodsName != ''">
-                and `goods_name` like CONCAT('%', #{goodsName}, '%')
+            <if test="goodsManagement.goodsName != null and goodsManagement.goodsName != ''">
+                and `goods_name` like CONCAT('%', #{goodsManagement.goodsName}, '%')
             </if>
-            <if test="goodsNumber != null">
-                and `goods_number` = #{goodsNumber}
+            <if test="goodsManagement.goodsNumber != null">
+                and `goods_number` = #{goodsManagement.goodsNumber}
             </if>
-            <if test="yesterdayGoodsNumber != null">
-                and `yesterday_goods_number` = #{yesterdayGoodsNumber}
+            <if test="goodsManagement.yesterdayGoodsNumber != null">
+                and `yesterday_goods_number` = #{goodsManagement.yesterdayGoodsNumber}
             </if>
-            <if test="lastWeekGoodsNumber != null">
-                and `last_week_goods_number` = #{lastWeekGoodsNumber}
+            <if test="goodsManagement.lastWeekGoodsNumber != null">
+                and `last_week_goods_number` = #{goodsManagement.lastWeekGoodsNumber}
             </if>
-            <if test="lastMonthGoodsNumber != null">
-                and `last_month_goods_number` = #{lastMonthGoodsNumber}
+            <if test="goodsManagement.lastMonthGoodsNumber != null">
+                and `last_month_goods_number` = #{goodsManagement.lastMonthGoodsNumber}
             </if>
-            <if test="lastQuarterGoodsNumber != null">
-                and `last_quarter_goods_number` = #{lastQuarterGoodsNumber}
+            <if test="goodsManagement.lastQuarterGoodsNumber != null">
+                and `last_quarter_goods_number` = #{goodsManagement.lastQuarterGoodsNumber}
             </if>
-            <if test="lastYearGoodsNumber != null">
-                and `last_year_goods_number` = #{lastYearGoodsNumber}
+            <if test="goodsManagement.lastYearGoodsNumber != null">
+                and `last_year_goods_number` = #{goodsManagement.lastYearGoodsNumber}
             </if>
-            <if test="lastOperatorId != null">
-                and `last_operator_id` = #{lastOperatorId}
+            <if test="goodsManagement.lastOperatorId != null">
+                and `last_operator_id` = #{goodsManagement.lastOperatorId}
             </if>
-            <if test="quantityCeiling != null">
-                and `quantity_ceiling` = #{quantityCeiling}
+            <if test="goodsManagement.quantityCeiling != null">
+                and `quantity_ceiling` = #{goodsManagement.quantityCeiling}
             </if>
-            <if test="quantityFloor != null">
-                and `quantity_floor` = #{quantityFloor}
+            <if test="goodsManagement.quantityFloor != null">
+                and `quantity_floor` = #{goodsManagement.quantityFloor}
             </if>
-            <if test="goodsStatusId != null">
-                and `goods_status_id` = #{goodsStatusId}
+            <if test="goodsManagement.goodsStatusId != null">
+                and `goods_status_id` = #{goodsManagement.goodsStatusId}
             </if>
-            <if test="createTime != null">
-                and `create_time` = #{createTime}
+            <if test="goodsManagement.createTime != null">
+                and `create_time` = #{goodsManagement.createTime}
             </if>
-            <if test="updateTime != null">
-                and `update_time` = #{updateTime}
+            <if test="goodsManagement.updateTime != null">
+                and `update_time` = #{goodsManagement.updateTime}
             </if>
         </where>
+        limit #{page.beginIndex},#{page.showNumber};
     </select>
 
     <select id="countGoodsNumberByGoodsManagement" parameterType="GoodsManagement" resultType="Integer">
         select count(1) from goods_management
         <where>
-            <if test="goodsId != null">
+            <if test="goodsId != null and goodsId != ''">
                 `goods_id` = #{goodsId}
             </if>
             <if test="goodsName != null and goodsName != ''">

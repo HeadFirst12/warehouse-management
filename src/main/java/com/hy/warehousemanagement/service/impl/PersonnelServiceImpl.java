@@ -13,6 +13,9 @@ import com.hy.warehousemanagement.pojo.PersonnelManagement;
 import com.hy.warehousemanagement.service.PersonnelService;
 import com.hy.warehousemanagement.utils.AssembleResultUtil;
 import com.hy.warehousemanagement.utils.TimesUtil;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -94,5 +97,11 @@ public class PersonnelServiceImpl implements PersonnelService {
         }
         LayResult layResult = AssembleResultUtil.assembleLayResult(permissionManagements, personnelManagementNumber);
         return layResult;
+    }
+
+    @Override
+    public PersonnelManagement checkPersonnelByPersonnel(PersonnelManagement personnelManagement) {
+        PersonnelManagement user = personnelManagementMapper.getPersonnelManagementByPersonnel(personnelManagement);
+        return user;
     }
 }

@@ -1,8 +1,10 @@
 package com.hy.warehousemanagement.mapper;
 
+import com.hy.warehousemanagement.model.LayRequest;
+import com.hy.warehousemanagement.model.Page;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,8 +16,9 @@ public interface GoodsManagementMapper {
     /**
      * 查询库存商品列表
      * @return
+     * @param page
      */
-    List<GoodsManagement> queryGoodsList();
+    List<GoodsManagement> queryGoodsList(Page page);
 
     /**
      * 统计库存商品总数
@@ -28,7 +31,7 @@ public interface GoodsManagementMapper {
      * @param goodsId
      * @return
      */
-    GoodsManagement getGoodsManagementById(Long goodsId);
+    GoodsManagement getGoodsManagementById(String goodsId);
 
     /**
      * 插入货物
@@ -54,9 +57,10 @@ public interface GoodsManagementMapper {
     /**
      * 多条件查询货物库存
      * @param goodsManagement
+     * @param page
      * @return
      */
-    List<GoodsManagement> selectGoodsByGoodsManagement(GoodsManagement goodsManagement);
+    List<GoodsManagement> selectGoodsByGoodsManagement(@Param("goodsManagement")GoodsManagement goodsManagement, @Param("page") Page page);
 
     /**
      * 统计多条件查询出来的库存

@@ -33,5 +33,17 @@ public class Constant {
 
     public static final String ERR_DESC = "errDesc";
 
+    public static final String CREATE_TIME = "createTime";
 
+    public static final String UPDATE_TIME = "updateTime";
+
+    public static final String LAST_OPERATOR_ID = "lastOperatorId";
+
+    public static final String GOODS_STATUS_ID = "goodsStatusId";
+
+    public static final String ENTRY_GOODS_TIME = "entryGoodsTime";
+
+    public static final String OUT_GOODS_TIME = "outGoodsTime";
+
+    public static final String OPERATOR_ID = "operatorId";
 }

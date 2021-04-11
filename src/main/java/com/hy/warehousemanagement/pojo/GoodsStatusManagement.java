@@ -18,9 +18,9 @@ public class GoodsStatusManagement implements Serializable {
     private static final long serialVersionUID = -125058272378327598L;
 
     //货物状态主键
-    private Integer goods_status_id;
+    private Integer goodsStatusId;
     //货物状态
-    private String goods_status;
+    private String goodsStatus;
     //货物状态描述
-    private String goods_status_desc;
+    private String goodsStatusDesc;
 }

@@ -173,4 +173,8 @@
     <select id="getGoodsManagementByGoodsName" parameterType="String" resultType="GoodsManagement">
         select * from  goods_management where goods_name = #{goodsName};
     </select>
+
+    <select id="countGoodsNumberByGoodsStatusId" resultType="Integer" parameterType="Integer">
+        select count(1) from goods_management where goods_status_id = #{goodsStatusId};
+    </select>
 </mapper>

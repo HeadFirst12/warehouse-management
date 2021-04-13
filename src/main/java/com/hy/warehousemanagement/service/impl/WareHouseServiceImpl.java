@@ -6,6 +6,7 @@ import com.hy.warehousemanagement.filter.BaseWarehouseFilter;
 import com.hy.warehousemanagement.model.*;
 import com.hy.warehousemanagement.pojo.EntryWarehouseManagement;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
+import com.hy.warehousemanagement.pojo.GoodsStatusManagement;
 import com.hy.warehousemanagement.pojo.OutWarehouseManagement;
 import com.hy.warehousemanagement.service.WareHouseService;
 import com.hy.warehousemanagement.utils.AssembleResultUtil;
@@ -197,5 +198,40 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
         LayResult layResult = AssembleResultUtil.assembleLayResult(outWarehouseJSONArray, countOutWarehouseNumber);
         return layResult;
     }
+
+    @Override
+    public WarehouseData selectWareHouseData() {
+        WarehouseData warehouseData = new WarehouseData();
+        List<GoodsStatusManagement> goodsStatusManagements = goodsStatusManagementMapper.queryGoodsStatusList();
+        for (GoodsStatusManagement goodsStatusManagement : goodsStatusManagements) {
+            Integer goodsStatusId = goodsStatusManagement.getGoodsStatusId();
+            Integer number = goodsManagementMapper.countGoodsNumberByGoodsStatusId(goodsStatusId);
+
+            if (GoodsStatusEnum.OVER_CEILING_STATUS.getGoodsStatusId() == goodsStatusId) {
+                warehouseData.setOverCeilingNumber(number);
+            }
+
+            if (GoodsStatusEnum.NEAR_CEILING_STATUS.getGoodsStatusId() == goodsStatusId) {
+                warehouseData.setNearCeilingNumber(number);
+            }
+
+            if (GoodsStatusEnum.NORMAL_STATUS.getGoodsStatusId() == goodsStatusId) {
+                warehouseData.setNormalNumber(number);
+            }
+
+            if (GoodsStatusEnum.OVER_FLOOR_STATUS.getGoodsStatusId() == goodsStatusId) {
+                warehouseData.setOverFloorNumber(number);
+            }
+
+            if (GoodsStatusEnum.NEAR_FLOOR_STATUS.getGoodsStatusId() == goodsStatusId) {
+                warehouseData.setNearFloorNumber(number);
+            }
+
+        }
+        warehouseData.setCountNumber(goodsManagementMapper.countGoodsNumber());
+
+        return warehouseData;
+    }
+
 
 }

@@ -17,9 +17,6 @@ public class MvcConfig implements WebMvcConfigurer {
         //首页路径
         registry.addViewController("/").setViewName("views/index");
 
-        //控制台
-        registry.addViewController("/home/console").setViewName("views/home/console");
-
         //用户基本资料修改
         registry.addViewController("/set/info").setViewName("views/set/info");
 

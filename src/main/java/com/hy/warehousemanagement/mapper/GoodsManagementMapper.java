@@ -1,6 +1,5 @@
 package com.hy.warehousemanagement.mapper;
 
-import com.hy.warehousemanagement.model.LayRequest;
 import com.hy.warehousemanagement.model.Page;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 import org.apache.ibatis.annotations.Mapper;
@@ -75,4 +74,10 @@ public interface GoodsManagementMapper {
      * @return
      */
     GoodsManagement getGoodsManagementByGoodsName(String goodsName);
+
+    /**
+     * 通过库存状态获取库存数量
+     * @return
+     */
+    Integer countGoodsNumberByGoodsStatusId(Integer goodsStatusId);
 }

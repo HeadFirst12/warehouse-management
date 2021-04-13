@@ -3,6 +3,7 @@ package com.hy.warehousemanagement.service;
 import com.hy.warehousemanagement.model.AjaxResult;
 import com.hy.warehousemanagement.model.LayRequest;
 import com.hy.warehousemanagement.model.LayResult;
+import com.hy.warehousemanagement.model.WarehouseData;
 import com.hy.warehousemanagement.pojo.EntryWarehouseManagement;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 import com.hy.warehousemanagement.pojo.OutWarehouseManagement;
@@ -95,4 +96,10 @@ public interface WareHouseService {
      * @return
      */
     LayResult searchOutGoodsByOutGoods(OutWarehouseManagement outWarehouseManagement, LayRequest layRequest);
+
+    /**
+     * 获取库存中不同状态的库存数量
+     * @return
+     */
+    WarehouseData selectWareHouseData();
 }

@@ -27,19 +27,4 @@ public class PersonnelController {
         LayResult layResult = personnelService.getPermissionList();
         return layResult;
     }
-
-    /**
-     * 用户登录实现
-     */
-//    @RequestMapping("/login")
-//    @ResponseBody
-//    public AjaxResult login(@RequestBody PersonnelManagement personnelManagement) {
-//        PersonnelManagement user = personnelService.checkPersonnelByPersonnel(personnelManagement);
-//        AjaxResult ajaxResult = new AjaxResult();
-//        if(user != null) {
-//            ajaxResult.setCode(StatusEnum.AJAX_STATUS_SUCCESS.getCode());
-//            ajaxResult.setData((JSONObject) JSONObject.toJSON(user));
-//        }
-//        return ajaxResult;
-//    }
 }

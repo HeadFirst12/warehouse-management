@@ -46,4 +46,6 @@ public class Constant {
     public static final String OUT_GOODS_TIME = "outGoodsTime";
 
     public static final String OPERATOR_ID = "operatorId";
+
+    public static final String WAREHOUSE_DATA = "warehouseData";
 }

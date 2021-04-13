@@ -9,10 +9,7 @@ import com.hy.warehousemanagement.pojo.GoodsManagement;
 import com.hy.warehousemanagement.pojo.GoodsStatusManagement;
 import com.hy.warehousemanagement.pojo.OutWarehouseManagement;
 import com.hy.warehousemanagement.service.WareHouseService;
-import com.hy.warehousemanagement.utils.AssembleResultUtil;
-import com.hy.warehousemanagement.utils.CreatOrderIdUtil;
-import com.hy.warehousemanagement.utils.GetResultUtil;
-import com.hy.warehousemanagement.utils.PageUtil;
+import com.hy.warehousemanagement.utils.*;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -202,33 +199,40 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
     @Override
     public WarehouseData selectWareHouseData() {
         WarehouseData warehouseData = new WarehouseData();
+        Integer countNumber = goodsManagementMapper.countGoodsNumber();
+        String rates;
         List<GoodsStatusManagement> goodsStatusManagements = goodsStatusManagementMapper.queryGoodsStatusList();
         for (GoodsStatusManagement goodsStatusManagement : goodsStatusManagements) {
             Integer goodsStatusId = goodsStatusManagement.getGoodsStatusId();
             Integer number = goodsManagementMapper.countGoodsNumberByGoodsStatusId(goodsStatusId);
-
+            rates = TimesUtil.doubleToStringFormat(number, countNumber);
             if (GoodsStatusEnum.OVER_CEILING_STATUS.getGoodsStatusId() == goodsStatusId) {
                 warehouseData.setOverCeilingNumber(number);
+                warehouseData.setOverCeilingRate(rates);
             }
 
             if (GoodsStatusEnum.NEAR_CEILING_STATUS.getGoodsStatusId() == goodsStatusId) {
                 warehouseData.setNearCeilingNumber(number);
+                warehouseData.setNearCeilingRate(rates);
             }
 
             if (GoodsStatusEnum.NORMAL_STATUS.getGoodsStatusId() == goodsStatusId) {
                 warehouseData.setNormalNumber(number);
+                warehouseData.setNormalRate(rates);
             }
 
             if (GoodsStatusEnum.OVER_FLOOR_STATUS.getGoodsStatusId() == goodsStatusId) {
                 warehouseData.setOverFloorNumber(number);
+                warehouseData.setOverFloorRate(rates);
             }
 
             if (GoodsStatusEnum.NEAR_FLOOR_STATUS.getGoodsStatusId() == goodsStatusId) {
                 warehouseData.setNearFloorNumber(number);
+                warehouseData.setNearFloorRate(rates);
             }
 
         }
-        warehouseData.setCountNumber(goodsManagementMapper.countGoodsNumber());
+        warehouseData.setCountNumber(countNumber);
 
         return warehouseData;
     }

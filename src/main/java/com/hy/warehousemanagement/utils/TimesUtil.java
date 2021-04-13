@@ -1,5 +1,6 @@
 package com.hy.warehousemanagement.utils;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,6 +25,13 @@ public class TimesUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         String timeStr = simpleDateFormat.format(date);
         return timeStr;
+    }
+
+    public static String doubleToStringFormat(Integer par,Integer count) {
+        Double rate = (double)par / (double)count;
+        NumberFormat num = NumberFormat.getPercentInstance();
+        String rates = num.format(rate);
+        return rates;
     }
 
 }

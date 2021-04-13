@@ -202,29 +202,27 @@
         </div>
         
         <div class="layui-card">
-          <div class="layui-card-header">效果报告</div>
-          <div class="layui-card-body layadmin-takerates">
-            <div class="layui-progress" lay-showPercent="yes">
-              <h3>转化率（日同比 28% <span class="layui-edge layui-edge-top" lay-tips="增长" lay-offset="-15"></span>）</h3>
-              <div class="layui-progress-bar" lay-percent="65%"></div>
-            </div>
-            <div class="layui-progress" lay-showPercent="yes">
-              <h3>签到率（日同比 11% <span class="layui-edge layui-edge-bottom" lay-tips="下降" lay-offset="-15"></span>）</h3>
-              <div class="layui-progress-bar" lay-percent="32%"></div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="layui-card">
           <div class="layui-card-header">实时监控</div>
           <div class="layui-card-body layadmin-takerates">
             <div class="layui-progress" lay-showPercent="yes">
-              <h3>CPU使用率</h3>
-              <div class="layui-progress-bar" lay-percent="58%"></div>
+              <h3>正常库存率</h3>
+              <div class="layui-progress-bar" th:lay-percent="${warehouseData.normalRate}"></div>
             </div>
             <div class="layui-progress" lay-showPercent="yes">
-              <h3>内存占用率</h3>
-              <div class="layui-progress-bar layui-bg-red" lay-percent="90%"></div>
+              <h3>接近库存下限率</h3>
+              <div class="layui-progress-bar layui-bg-orange" th:lay-percent="${warehouseData.nearFloorRate}"></div>
+            </div>
+            <div class="layui-progress" lay-showPercent="yes">
+              <h3>接近库存上限率</h3>
+              <div class="layui-progress-bar layui-bg-orange" th:lay-percent="${warehouseData.nearCeilingRate}"></div>
+            </div>
+            <div class="layui-progress" lay-showPercent="yes">
+              <h3>超过库存下限率</h3>
+              <div class="layui-progress-bar layui-bg-red" th:lay-percent="${warehouseData.overFloorRate}"></div>
+            </div>
+            <div class="layui-progress" lay-showPercent="yes">
+              <h3>超过库存上限率</h3>
+              <div class="layui-progress-bar layui-bg-red" th:lay-percent="${warehouseData.overCeilingRate}"></div>
             </div>
           </div>
         </div>

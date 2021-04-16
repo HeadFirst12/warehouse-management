@@ -93,6 +93,13 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+        <!-- commons-httpclient -->
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>

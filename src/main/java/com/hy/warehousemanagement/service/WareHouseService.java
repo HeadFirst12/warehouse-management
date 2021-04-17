@@ -102,4 +102,11 @@ public interface WareHouseService {
      * @return
      */
     WarehouseData selectWareHouseData();
+
+    /**
+     * 获取库存非正常状态的货物列表
+     * @param layRequest
+     * @return
+     */
+    LayResult getGoodsStatusAbnormal(LayRequest layRequest);
 }

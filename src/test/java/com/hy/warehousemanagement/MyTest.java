@@ -14,7 +14,7 @@ public class MyTest {
 
     @Test
     public void test2() throws IOException {
-        String filePath = "C:\\Users\\EDZ\\Desktop\\1.txt";
+        String filePath = "/Users/hy/Desktop/1.txt";
         String encoding = "UTF-8";
         int count = 0;
         GoodsManagement goodsManagement = new GoodsManagement();
@@ -33,6 +33,7 @@ public class MyTest {
                 goodsManagement.setQuantityCeiling(1000L);
                 goodsManagement.setQuantityFloor(0L);
                 goodsManagement.setGoodsNumber(l);
+                post(goodsManagement,"http://localhost:8081/warehouse/goods-add");
             }
             read.close();
         } else {

@@ -52,14 +52,7 @@ public class BaseWarehouseFilter {
                 mapperOperator(goodsManagementJSON,Constant.LAST_OPERATOR_ID);
 
                 //库存状态映射
-                Integer goodsStatusId = goodsManagementJSON.getInteger(Constant.GOODS_STATUS_ID);
-                List<GoodsStatusManagement> goodsStatusManagements = goodsStatusManagementMapper.queryGoodsStatusList();
-                for (GoodsStatusManagement goodsStatusManagement : goodsStatusManagements) {
-                    if(goodsStatusManagement.getGoodsStatusId() == goodsStatusId) {
-                        goodsManagementJSON.put(Constant.GOODS_STATUS_ID,goodsStatusManagement.getGoodsStatusDesc());
-                        break;
-                    }
-                }
+                mapperGoodsStatus(goodsManagementJSON,Constant.GOODS_STATUS_ID);
             }
         }
         return goodsManagementJSONArray;
@@ -124,6 +117,20 @@ public class BaseWarehouseFilter {
         //时间格式转化
         String date = TimesUtil.DateToStringFormat(sources.getDate(key),format);
         sources.put(key, date);
+    }
+
+    /**
+     * 库存状态映射
+     */
+    private void mapperGoodsStatus(JSONObject sources,String key) {
+        Integer goodsStatusId = sources.getInteger(Constant.GOODS_STATUS_ID);
+        List<GoodsStatusManagement> goodsStatusManagements = goodsStatusManagementMapper.queryGoodsStatusList();
+        for (GoodsStatusManagement goodsStatusManagement : goodsStatusManagements) {
+            if(goodsStatusManagement.getGoodsStatusId() == goodsStatusId) {
+                sources.put(key,goodsStatusManagement.getGoodsStatusDesc());
+                break;
+            }
+        }
     }
 
     /**

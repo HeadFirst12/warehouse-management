@@ -80,4 +80,17 @@ public interface GoodsManagementMapper {
      * @return
      */
     Integer countGoodsNumberByGoodsStatusId(Integer goodsStatusId);
+
+    /**
+     * 取出库存中状态非正常的库存列表
+     * @param page
+     * @return
+     */
+    List<GoodsManagement> selectGoodsListByStatusAbnormal(Page page);
+
+    /**
+     * 取出库存中状态非正常数量
+     * @return
+     */
+    Integer countGoodsNumberByStatusAbnormal();
 }

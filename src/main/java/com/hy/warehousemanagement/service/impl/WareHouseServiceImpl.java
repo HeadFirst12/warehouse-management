@@ -102,6 +102,7 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
                 //库存中不存在该商品需要新增
                 goodsManagement.setGoodsId(CreatOrderIdUtil.getGoodsId());
                 goodsManagement.setGoodsStatusId(GetResultUtil.getStatusResult(goodsManagement));
+                goodsManagement.setLastOperatorId(authenticationFilter.getNowUserId());
                 Integer insertResult = goodsManagementMapper.insertGoods(goodsManagement);
                 ajaxResult = AssembleResultUtil.assembleAjaxResult(insertResult);
             } else {
@@ -235,6 +236,16 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
         warehouseData.setCountNumber(countNumber);
 
         return warehouseData;
+    }
+
+    //消息通知实现
+    @Override
+    public LayResult getGoodsStatusAbnormal(LayRequest layRequest) {
+        List<GoodsManagement> goodsManagements = goodsManagementMapper.selectGoodsListByStatusAbnormal(PageUtil.getPage(layRequest));
+        Integer goodsNumber = goodsManagementMapper.countGoodsNumberByStatusAbnormal();
+        List<JSONObject> goodsManagementJSONArray = mapperGoodsManagement(goodsManagements);
+        LayResult layResult = AssembleResultUtil.assembleLayResult(goodsManagementJSONArray, goodsNumber);
+        return layResult;
     }
 
 

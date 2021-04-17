@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @EnableWebSecurity
-    public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     PersonnelManagementMapper personnelManagementMapper;
@@ -56,17 +56,17 @@ import java.util.List;
         List<PersonnelManagement> personnelManagements = personnelManagementMapper.queryPersonnelManagementList();
         for (PersonnelManagement personnelManagement : personnelManagements) {
             Integer permissionLevel = personnelManagement.getPermissionLevel();
-            if(permissionLevel == 1 || permissionLevel == 2 || permissionLevel == 3) {
+            if (permissionLevel == 1 || permissionLevel == 2 || permissionLevel == 3) {
                 String userName = personnelManagement.getUserName();
                 String userPassword = personnelManagement.getUserPassword();
                 auth.inMemoryAuthentication().passwordEncoder(new BCryptPasswordEncoder())
-                    .withUser(userName).password(new BCryptPasswordEncoder().encode(userPassword)).roles("USER");
+                        .withUser(userName).password(new BCryptPasswordEncoder().encode(userPassword)).roles("USER");
             }
         }
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers( "/static/**");
+        web.ignoring().antMatchers("/static/**");
     }
 }

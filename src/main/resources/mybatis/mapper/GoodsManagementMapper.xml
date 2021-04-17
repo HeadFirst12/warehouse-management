@@ -177,4 +177,13 @@
     <select id="countGoodsNumberByGoodsStatusId" resultType="Integer" parameterType="Integer">
         select count(1) from goods_management where goods_status_id = #{goodsStatusId};
     </select>
+
+    <select id="selectGoodsListByStatusAbnormal" resultType="GoodsManagement">
+        select * from goods_management where goods_status_id != 3
+        limit #{beginIndex},#{showNumber};
+    </select>
+
+    <select id="countGoodsNumberByStatusAbnormal" resultType="Integer">
+        select count(1) from goods_management where goods_status_id != 3;
+    </select>
 </mapper>

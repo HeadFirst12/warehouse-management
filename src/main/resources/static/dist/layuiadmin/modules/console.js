@@ -16,7 +16,7 @@
         }), a.render("progress")
     }), layui.use(["carousel", "echarts"], function () {
         var e = layui.$, t = layui.carousel, a = layui.echarts, i = [], l = [{
-            title: {text: "今日流量趋势", x: "center", textStyle: {fontSize: 14}},
+            title: {text: "库存状态分析", x: "center", textStyle: {fontSize: 14}},
             tooltip: {trigger: "axis"},
             legend: {data: ["", ""]},
             xAxis: [{

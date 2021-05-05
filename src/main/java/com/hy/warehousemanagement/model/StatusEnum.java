@@ -7,7 +7,7 @@ public enum StatusEnum {
 
     AJAX_CODE_SUCCESS("00000000","通讯成功"),
 
-    AJAX_CODE_FAIL("99999999","通讯失败"),
+    AJAX_CODE_FAIL("00000001","通讯失败"),
 
     AJAX_STATUS_SUCCESS("09","业务成功"),
 

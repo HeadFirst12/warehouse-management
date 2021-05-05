@@ -17,9 +17,9 @@ public class AjaxResult {
     //请求业务状态
     private String status;
     //错误码
-    private String errCode;
+    private String errorCode;
     //错误信息
-    private String errDesc;
+    private String errorDesc;
     //返回数据
     private JSONObject data;
     //备注

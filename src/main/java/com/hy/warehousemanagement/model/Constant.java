@@ -48,4 +48,8 @@ public class Constant {
     public static final String OPERATOR_ID = "operatorId";
 
     public static final String WAREHOUSE_DATA = "warehouseData";
+
+    public static final String GOODS_ID = "goodsId";
+
+    public static final String GOODS_ID_LIST_JSON = "goodsIdListJson";
 }

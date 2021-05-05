@@ -27,8 +27,8 @@ public class AssembleResultUtil {
         AjaxResult ajaxResult = new AjaxResult();
         ajaxResult.setCode(StatusEnum.AJAX_CODE_SUCCESS.getCode());
         ajaxResult.setStatus(StatusEnum.AJAX_STATUS_FAIL.getCode());
-        ajaxResult.setErrCode(systemErrorCodeEnum.getErrorCode());
-        ajaxResult.setErrDesc(systemErrorCodeEnum.getErrorDesc());
+        ajaxResult.setErrorCode(systemErrorCodeEnum.getErrorCode());
+        ajaxResult.setErrorDesc(systemErrorCodeEnum.getErrorDesc());
         return ajaxResult;
     }
 
@@ -37,8 +37,21 @@ public class AssembleResultUtil {
         AjaxResult ajaxResult = new AjaxResult();
         ajaxResult.setCode(StatusEnum.AJAX_CODE_SUCCESS.getCode());
         ajaxResult.setStatus(StatusEnum.AJAX_STATUS_FAIL.getCode());
-        ajaxResult.setErrCode(exceptionInfoJson.getString(Constant.ERR_CODE));
-        ajaxResult.setErrDesc(exceptionInfoJson.getString(Constant.ERR_DESC));
+        ajaxResult.setErrorCode(exceptionInfoJson.getString(Constant.ERR_CODE));
+        ajaxResult.setErrorDesc(exceptionInfoJson.getString(Constant.ERR_DESC));
+        return ajaxResult;
+    }
+
+    /**
+     * 未知异常返回
+     * @return
+     */
+    public static AjaxResult assembleAjaxFailResult() {
+        AjaxResult ajaxResult = new AjaxResult();
+        ajaxResult.setCode(StatusEnum.AJAX_CODE_SUCCESS.getCode());
+        ajaxResult.setStatus(StatusEnum.AJAX_STATUS_FAIL.getCode());
+        ajaxResult.setErrorCode(SystemErrorCodeEnum.SYSTEM_ERROR.getErrorCode());
+        ajaxResult.setErrorDesc(SystemErrorCodeEnum.SYSTEM_ERROR.getErrorDesc());
         return ajaxResult;
     }
 

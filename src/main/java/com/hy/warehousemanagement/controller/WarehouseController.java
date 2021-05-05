@@ -1,5 +1,6 @@
 package com.hy.warehousemanagement.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hy.warehousemanagement.model.AjaxResult;
 import com.hy.warehousemanagement.model.Constant;
 import com.hy.warehousemanagement.model.LayRequest;
@@ -8,6 +9,7 @@ import com.hy.warehousemanagement.pojo.EntryWarehouseManagement;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 import com.hy.warehousemanagement.pojo.OutWarehouseManagement;
 import com.hy.warehousemanagement.service.WareHouseService;
+import com.hy.warehousemanagement.utils.AssembleResultUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -108,8 +110,13 @@ public class WarehouseController {
      */
     @PostMapping("/warehouse/goods-del")
     @ResponseBody
-    public AjaxResult goodsDel(@RequestBody GoodsManagement goodsManagement) {
-        return wareHouseService.delGoods(goodsManagement);
+    public AjaxResult goodsDel(@RequestBody JSONObject goodsIdListJson) {
+        try {
+            return wareHouseService.delGoods(goodsIdListJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AssembleResultUtil.assembleAjaxFailResult();
+        }
     }
 
     /**

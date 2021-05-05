@@ -12,6 +12,10 @@ import java.io.*;
 
 public class MyTest {
 
+    /**
+     * 通过文件获取数据，调用http接口向数据库中插入数据
+     * @throws IOException
+     */
     @Test
     public void test2() throws IOException {
         String filePath = "/Users/hy/Desktop/1.txt";
@@ -41,6 +45,12 @@ public class MyTest {
         }
     }
 
+    /**
+     * 发post请求
+     * @param goodsManagement
+     * @param url
+     * @throws IOException
+     */
     public static void post(GoodsManagement goodsManagement,String url) throws IOException {
         // 服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。所以说到 POST 提交数据方案，包含了 Content-Type 和消息主体编码方式两部分
         HttpClient client = new HttpClient(); // 客户端实例化
@@ -60,15 +70,5 @@ public class MyTest {
         String s = new String(responseBody);
         System.out.println(s);
 
-    }
-
-    @Test
-    public void test1() throws IOException {
-        GoodsManagement goodsManagement = new GoodsManagement();
-        goodsManagement.setGoodsName("变形金刚");
-        goodsManagement.setQuantityCeiling(1000L);
-        goodsManagement.setQuantityFloor(0L);
-        goodsManagement.setGoodsNumber(500L);
-        post(goodsManagement,"http://localhost:8081/warehouse/goods-add");
     }
 }

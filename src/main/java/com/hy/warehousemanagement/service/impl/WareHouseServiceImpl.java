@@ -1,5 +1,6 @@
 package com.hy.warehousemanagement.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hy.warehousemanagement.exception.WarehouseException;
 import com.hy.warehousemanagement.filter.BaseWarehouseFilter;
@@ -51,7 +52,7 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
         AjaxResult ajaxResult;
 
         //更新库存数量
-        Integer updateGoodsResult = null;
+        Integer updateGoodsResult;
         try {
             updateGoodsResult = updateGoodsNumber(goodsManagementById,afterEntryGoodsNumber);
         } catch (Exception e) {
@@ -118,10 +119,24 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
     }
 
     @Override
-    public AjaxResult delGoods(GoodsManagement goodsManagement) {
-        String goodsId = goodsManagement.getGoodsId();
-        Integer delResult =  goodsManagementMapper.delGoodsManagementById(goodsId);
-        AjaxResult ajaxResult = AssembleResultUtil.assembleAjaxResult(delResult);
+    public AjaxResult delGoods(JSONObject goodsIdListJson) {
+        //处理前段传输过来的格式
+        JSONArray goodsIdJsonList = goodsIdListJson.getJSONArray(Constant.GOODS_ID_LIST_JSON);
+        //记录删除成功数量
+        Integer delCountNum = 0;
+        for (int i = 0; i < goodsIdJsonList.size(); i++) {
+            JSONObject goodsIdJson = goodsIdJsonList.getJSONObject(i);
+            String goodsId = goodsIdJson.getString(Constant.GOODS_ID);
+            Integer delResult = goodsManagementMapper.delGoodsManagementById(goodsId);
+            //每次删除成功，计数器+1
+            if (delResult > 0) {
+                delCountNum++;
+            }
+        }
+        //最后如果计数器的数量等于集合的长度，则删除成功
+        Integer result = delCountNum == goodsIdJsonList.size() ? 1 : 0;
+        //组装返回报文
+        AjaxResult ajaxResult = AssembleResultUtil.assembleAjaxResult(result);
         return ajaxResult;
     }
 

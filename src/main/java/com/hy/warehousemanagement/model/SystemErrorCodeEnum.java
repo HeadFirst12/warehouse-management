@@ -23,7 +23,7 @@ public enum SystemErrorCodeEnum {
 
     ,UPDATE_GOODS_NUMBER_TOO_LITTLE("C03007","更新的数据不足下限50%以下，系统拒绝更新")
 
-    ,UPDATE_GOODS_FLOOR_MORE_THAN_CEILING("C03007","下限设置超过上限，不允许操作");
+    ,UPDATE_GOODS_FLOOR_MORE_THAN_CEILING("C03007","下限设置超过上限，不允许操作")
     ;
 
 

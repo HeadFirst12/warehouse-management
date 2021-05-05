@@ -1,5 +1,6 @@
 package com.hy.warehousemanagement.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hy.warehousemanagement.model.AjaxResult;
 import com.hy.warehousemanagement.model.LayRequest;
 import com.hy.warehousemanagement.model.LayResult;
@@ -40,10 +41,10 @@ public interface WareHouseService {
 
     /**
      * 删除商品库存
-     * @param goodsManagement
+     * @param goodsIdListJson
      * @return
      */
-    AjaxResult delGoods(GoodsManagement goodsManagement);
+    AjaxResult delGoods(JSONObject goodsIdListJson);
 
     /**
      * 编辑库存

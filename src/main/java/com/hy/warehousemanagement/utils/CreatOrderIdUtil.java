@@ -11,6 +11,7 @@ import java.util.UUID;
 
 /**
  * 生成订单号工具类
+ * @author hy
  */
 public class CreatOrderIdUtil {
 

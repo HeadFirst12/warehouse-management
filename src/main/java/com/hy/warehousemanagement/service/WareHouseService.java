@@ -9,6 +9,9 @@ import com.hy.warehousemanagement.pojo.EntryWarehouseManagement;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 import com.hy.warehousemanagement.pojo.OutWarehouseManagement;
 
+/**
+ * @author hy
+ */
 public interface WareHouseService {
 
     /**

@@ -5,6 +5,9 @@ import com.hy.warehousemanagement.model.GoodsStatusEnum;
 import com.hy.warehousemanagement.model.SystemErrorCodeEnum;
 import com.hy.warehousemanagement.pojo.GoodsManagement;
 
+/**
+ * @author hy
+ */
 public class GetResultUtil {
 
     public static Integer getStatusResult(GoodsManagement goodsManagement) {

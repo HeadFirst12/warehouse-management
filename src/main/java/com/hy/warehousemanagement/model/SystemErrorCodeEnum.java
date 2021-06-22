@@ -2,6 +2,7 @@ package com.hy.warehousemanagement.model;
 
 /**
  * 系统错误码定义
+ * @author hy
  */
 public enum SystemErrorCodeEnum {
 

@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 拓展springmvc
+ * @author hy
  */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {

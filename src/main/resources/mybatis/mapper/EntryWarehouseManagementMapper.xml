@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.warehousemanagement.mapper.EntryWarehouseManagementMapper">
-    <select id="queryEntryWarehouseList" resultType="EntryWarehouseManagement">
+    <select id="queryEntryWarehouseList" resultType="com.hy.warehousemanagement.pojo.EntryWarehouseManagement">
         select * from entry_warehouse_management limit #{beginIndex},#{showNumber};
     </select>
 
@@ -11,14 +11,14 @@
         select count(1) from entry_warehouse_management;
     </select>
 
-    <insert id="addEntryWarehouse" parameterType="EntryWarehouseManagement">
+    <insert id="addEntryWarehouse" parameterType="com.hy.warehousemanagement.pojo.EntryWarehouseManagement">
         INSERT INTO
         `entry_warehouse_management`(`entry_order_id`, `entry_goods_id`, `entry_goods_name`, `entry_goods_number`, `entry_goods_time`, `before_entry_goods_number`, `after_entry_goods_number`, `operator_id`, `create_time`)
         VALUES
         (#{entryOrderId}, #{entryGoodsId}, #{entryGoodsName}, #{entryGoodsNumber}, NOW(), #{beforeEntryGoodsNumber}, #{afterEntryGoodsNumber}, #{operatorId}, NOW());
     </insert>
 
-    <select id="selectEntryGoodsByEntryGoods" resultType="EntryWarehouseManagement">
+    <select id="selectEntryGoodsByEntryGoods" resultType="com.hy.warehousemanagement.pojo.EntryWarehouseManagement">
         select * from entry_warehouse_management
         <where>
             <if test="entryWarehouse.id != null">

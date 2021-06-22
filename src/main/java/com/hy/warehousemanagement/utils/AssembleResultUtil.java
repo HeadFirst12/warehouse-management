@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * 组装结果返回工具类
+ * @author hy
  */
 public class AssembleResultUtil {
 
@@ -77,7 +78,7 @@ public class AssembleResultUtil {
 
     public static JSONObject getExceptionInfo(String message) {
         JSONObject result = new JSONObject();
-        String[] split = StringUtils.split(message,Constant.Separator);
+        String[] split = StringUtils.split(message,Constant.SEPARATOR);
         if(split.length >= 2) {
             result.put(Constant.ERR_CODE,split[0]);
             result.put(Constant.ERR_DESC,split[1]);

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.warehousemanagement.mapper.GoodsManagementMapper">
-    <select id="queryGoodsList" resultType="GoodsManagement" parameterType="com.hy.warehousemanagement.model.Page">
+    <select id="queryGoodsList" resultType="com.hy.warehousemanagement.pojo.GoodsManagement" parameterType="com.hy.warehousemanagement.model.Page">
         select * from goods_management limit #{beginIndex},#{showNumber};
     </select>
 
@@ -11,18 +11,18 @@
         select count(1) from goods_management;
     </select>
 
-    <insert id="insertGoods" parameterType="GoodsManagement">
+    <insert id="insertGoods" parameterType="com.hy.warehousemanagement.pojo.GoodsManagement">
         INSERT INTO
         `goods_management`(`goods_id`, `goods_name`, `goods_number`, `last_operator_id`, `quantity_ceiling`, `quantity_floor`, `goods_status_id`, `create_time`, `update_time`)
         VALUES
         (#{goodsId}, #{goodsName}, #{goodsNumber}, #{lastOperatorId}, #{quantityCeiling}, #{quantityFloor}, #{goodsStatusId}, NOW(), NOW());
     </insert>
 
-    <select id="getGoodsManagementById" parameterType="String" resultType="GoodsManagement">
+    <select id="getGoodsManagementById" parameterType="String" resultType="com.hy.warehousemanagement.pojo.GoodsManagement">
         select * from  goods_management where goods_id = #{goodsId};
     </select>
 
-    <update id="updateGoodsManagement" parameterType="GoodsManagement">
+    <update id="updateGoodsManagement" parameterType="com.hy.warehousemanagement.pojo.GoodsManagement">
         UPDATE `goods_management`
         <set>
             <if test="goodsName != null and goodsName != ''">
@@ -73,7 +73,7 @@
         DELETE FROM goods_management where goods_id = #{goodsId}
     </delete>
 
-    <select id="selectGoodsByGoodsManagement" resultType="GoodsManagement">
+    <select id="selectGoodsByGoodsManagement" resultType="com.hy.warehousemanagement.pojo.GoodsManagement">
         select * from goods_management
         <where>
             <if test="goodsManagement.goodsId != null and goodsManagement.goodsId != ''">
@@ -122,7 +122,7 @@
         limit #{page.beginIndex},#{page.showNumber};
     </select>
 
-    <select id="countGoodsNumberByGoodsManagement" parameterType="GoodsManagement" resultType="Integer">
+    <select id="countGoodsNumberByGoodsManagement" parameterType="com.hy.warehousemanagement.pojo.GoodsManagement" resultType="Integer">
         select count(1) from goods_management
         <where>
             <if test="goodsId != null and goodsId != ''">

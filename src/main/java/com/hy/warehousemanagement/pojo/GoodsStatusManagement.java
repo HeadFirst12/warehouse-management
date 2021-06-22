@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
+/**
+ * @author hy
+ */
 @Component
 @Data
 @ToString
@@ -17,10 +20,10 @@ public class GoodsStatusManagement implements Serializable {
 
     private static final long serialVersionUID = -125058272378327598L;
 
-    //货物状态主键
+    /** 货物状态主键 */
     private Integer goodsStatusId;
-    //货物状态
+    /** 货物状态 */
     private String goodsStatus;
-    //货物状态描述
+    /** 货物状态描述 */
     private String goodsStatusDesc;
 }

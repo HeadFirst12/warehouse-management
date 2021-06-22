@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * 人员页面服务层
+ * @author hy
  */
 @Service
 public class PersonnelServiceImpl implements PersonnelService {
@@ -59,13 +60,13 @@ public class PersonnelServiceImpl implements PersonnelService {
             for (JSONObject personnelManagementJSON : personnelManagementJSONArray) {
 
                 //时间格式转化
-                String jonsTime = TimesUtil.DateToStringFormat(personnelManagementJSON.getDate(Constant.JOIN_TIME), TimesUtil.SHORT_DATE_FORMAT);
+                String jonsTime = TimesUtil.dateToStringFormat(personnelManagementJSON.getDate(Constant.JOIN_TIME), TimesUtil.SHORT_DATE_FORMAT);
                 personnelManagementJSON.put(Constant.JOIN_TIME, jonsTime);
 
                 //人员级别映射
                 Long permissionLevel = personnelManagementJSON.getLong(Constant.PERMISSION_LEVEL);
                 for (PermissionManagement permissionManagement : permissionManagements) {
-                    if (permissionLevel == permissionManagement.getPermissionId()) {
+                    if (permissionLevel.equals(permissionManagement.getPermissionId())) {
                         personnelManagementJSON.put(Constant.PERMISSION_LEVEL, permissionManagement.getPermissionName());
                     }
                 }

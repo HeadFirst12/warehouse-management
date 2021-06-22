@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.warehousemanagement.mapper.PersonnelManagementMapper">
-    <select id="queryPersonnelManagementList" resultType="PersonnelManagement">
+    <select id="queryPersonnelManagementList" resultType="com.hy.warehousemanagement.pojo.PersonnelManagement">
         select * from personnel_management;
     </select>
 
@@ -15,11 +15,11 @@
         select count(1) from personnel_management;
     </select>
 
-    <select id="getPersonnelManagementById" parameterType="Long" resultType="PersonnelManagement">
+    <select id="getPersonnelManagementById" parameterType="Long" resultType="com.hy.warehousemanagement.pojo.PersonnelManagement">
         select * from   personnel_management where id = #{id}
     </select>
 
-    <select id="getPersonnelManagementByPersonnel" parameterType="PersonnelManagement" resultType="PersonnelManagement">
+    <select id="getPersonnelManagementByPersonnel" parameterType="com.hy.warehousemanagement.pojo.PersonnelManagement" resultType="com.hy.warehousemanagement.pojo.PersonnelManagement">
         select * from personnel_management
         <where>
             <if test="id != null">

@@ -16,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 
+/**
+ * @author hy
+ */
 @Controller
 public class WarehouseController {
 

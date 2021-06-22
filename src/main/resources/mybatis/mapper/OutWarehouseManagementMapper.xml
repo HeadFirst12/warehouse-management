@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.warehousemanagement.mapper.OutWarehouseManagementMapper">
-    <select id="queryOutWarehouseList" resultType="OutWarehouseManagement">
+    <select id="queryOutWarehouseList" resultType="com.hy.warehousemanagement.pojo.OutWarehouseManagement">
         select * from out_warehouse_management limit #{beginIndex},#{showNumber};
     </select>
 
@@ -11,14 +11,14 @@
         select count(1) from out_warehouse_management;
     </select>
 
-    <insert id="addOutWarehouse" parameterType="OutWarehouseManagement">
+    <insert id="addOutWarehouse" parameterType="com.hy.warehousemanagement.pojo.OutWarehouseManagement">
         INSERT INTO
         `out_warehouse_management`(`out_order_id`, `out_goods_id`, `out_goods_name`, `out_goods_number`, `out_goods_time`, `before_out_goods_number`, `after_out_goods_number`, `operator_id`, `create_time`)
         VALUES
         (#{outOrderId}, #{outGoodsId}, #{outGoodsName}, #{outGoodsNumber}, NOW(), #{beforeOutGoodsNumber}, #{afterOutGoodsNumber}, #{operatorId}, NOW());
     </insert>
 
-    <select id="selectOutGoodsByOutGoods" resultType="OutWarehouseManagement">
+    <select id="selectOutGoodsByOutGoods" resultType="com.hy.warehousemanagement.pojo.OutWarehouseManagement">
         select * from out_warehouse_management
         <where>
             <if test="outWarehouse.id != null">

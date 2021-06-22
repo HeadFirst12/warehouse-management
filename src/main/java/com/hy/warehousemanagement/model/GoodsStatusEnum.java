@@ -1,5 +1,9 @@
 package com.hy.warehousemanagement.model;
 
+/**
+ * @author hy
+ */
+
 public enum GoodsStatusEnum {
 
     OVER_CEILING_STATUS(5,"11","超过上限"),
@@ -8,11 +12,11 @@ public enum GoodsStatusEnum {
     NEAR_FLOOR_STATUS(2,"01","接近下限"),
     OVER_FLOOR_STATUS(1,"09","超过下限");
 
-    //货物状态主键
+    /** 货物状态主键 */
     private Integer goodsStatusId;
-    //货物状态
+    /** 货物状态 */
     private String goodsStatus;
-    //货物状态描述
+    /** 货物状态描述 */
     private String goodsStatusDesc;
 
     GoodsStatusEnum(Integer goodsStatusId, String goodsStatus, String goodsStatusDesc) {

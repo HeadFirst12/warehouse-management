@@ -14,7 +14,7 @@ const houseAjax = function (urlPath, data, asyncSts) {
             type: "POST",
             //请求的媒体类型
             contentType: "application/json;charset=UTF-8",
-            //同步处理
+            //是否异步处理
             async: asyncSts,
             //请求地址
             url: urlPath,

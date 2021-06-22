@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author hy
+ */
 @Mapper
 @Repository
 public interface PersonnelManagementMapper {
@@ -16,10 +19,16 @@ public interface PersonnelManagementMapper {
      */
     List<PersonnelManagement> queryPersonnelManagementList();
 
+    /**
+     * 查询管理人员信息通过Id
+     * @param id
+     * @return
+     */
     String queryPersonnelManagementNameById(Long id);
 
     /**
      * 统计人员总数
+     * @return
      */
     Integer countPersonnelManagement();
 

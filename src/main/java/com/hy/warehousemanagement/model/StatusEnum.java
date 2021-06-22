@@ -1,5 +1,9 @@
 package com.hy.warehousemanagement.model;
 
+/**
+ * @author hy
+ */
+
 public enum StatusEnum {
 
     //layUi表单请求code响应

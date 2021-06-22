@@ -12,6 +12,9 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author hy
+ */
 public class BaseWarehouseFilter {
 
     @Resource
@@ -101,7 +104,7 @@ public class BaseWarehouseFilter {
         Long operatorId = sources.getLong(key);
         List<PersonnelManagement> personnelManagements = personnelManagementMapper.queryPersonnelManagementList();
         for (PersonnelManagement personnelManagement : personnelManagements) {
-            if (personnelManagement.getId() == operatorId) {
+            if (personnelManagement.getId().equals(operatorId)) {
                 sources.put(key, personnelManagement.getName());
                 break;
             }
@@ -113,7 +116,7 @@ public class BaseWarehouseFilter {
      */
     private void mapperDate(JSONObject sources,String key,String format) {
         //时间格式转化
-        String date = TimesUtil.DateToStringFormat(sources.getDate(key),format);
+        String date = TimesUtil.dateToStringFormat(sources.getDate(key),format);
         sources.put(key, date);
     }
 
@@ -124,7 +127,7 @@ public class BaseWarehouseFilter {
         Integer goodsStatusId = sources.getInteger(Constant.GOODS_STATUS_ID);
         List<GoodsStatusManagement> goodsStatusManagements = goodsStatusManagementMapper.queryGoodsStatusList();
         for (GoodsStatusManagement goodsStatusManagement : goodsStatusManagements) {
-            if(goodsStatusManagement.getGoodsStatusId() == goodsStatusId) {
+            if(goodsStatusManagement.getGoodsStatusId().equals(goodsStatusId)) {
                 sources.put(key,goodsStatusManagement.getGoodsStatusDesc());
                 break;
             }

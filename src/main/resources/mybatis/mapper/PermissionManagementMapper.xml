@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.warehousemanagement.mapper.PermissionManagementsMapper">
-    <select id="queryPermissionManagementList" resultType="PermissionManagement">
+    <select id="queryPermissionManagementList" resultType="com.hy.warehousemanagement.pojo.PermissionManagement">
         select * from permission_management;
     </select>
 

@@ -23,4 +23,11 @@ public interface PermissionManagementsMapper {
      * @return
      */
     Integer countPermissionManagementNumber();
+
+    /**
+     * 通过权限Id查找权限对象
+     * @param permissionId 权限Id
+     * @return 权限对象
+     */
+    PermissionManagement queryPermissionManagementByPermissionId(Integer permissionId);
 }

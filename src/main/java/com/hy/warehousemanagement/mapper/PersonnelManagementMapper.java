@@ -45,4 +45,11 @@ public interface PersonnelManagementMapper {
      * @return
      */
     PersonnelManagement getPersonnelManagementByPersonnel(PersonnelManagement personnelManagement);
+
+    /**
+     * 通过userName查找用户对象
+     * @param userName 用户姓名
+     * @return 用户对象
+     */
+    PersonnelManagement getPersonnelManagementByUserName(String userName);
 }

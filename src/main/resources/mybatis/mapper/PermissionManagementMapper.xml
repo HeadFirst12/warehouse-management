@@ -10,4 +10,8 @@
     <select id="countPermissionManagementNumber" resultType="Integer">
         select count(1) from permission_management;
     </select>
+
+    <select id="queryPermissionManagementByPermissionId" parameterType="Integer" resultType="com.hy.warehousemanagement.pojo.PermissionManagement">
+        select * from permission_management where permission_id = #{userName};
+    </select>
 </mapper>

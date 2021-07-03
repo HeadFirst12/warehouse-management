@@ -28,4 +28,6 @@ public class PermissionManagement implements Serializable {
     private String permissionDescription;
     /** 职责 */
     private String responsibility;
+    /** 角色具有的权限（security使用） */
+    private String authorityList;
 }

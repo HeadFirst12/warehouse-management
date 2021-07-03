@@ -54,4 +54,8 @@
             </if>
         </where>
     </select>
+
+    <select id="getPersonnelManagementByUserName" parameterType="String" resultType="com.hy.warehousemanagement.pojo.PersonnelManagement">
+        select * from  personnel_management where `user_name` = #{userName}
+    </select>
 </mapper>

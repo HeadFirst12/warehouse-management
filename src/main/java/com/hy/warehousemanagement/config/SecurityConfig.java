@@ -2,10 +2,10 @@ package com.hy.warehousemanagement.config;
 
 import com.hy.warehousemanagement.mapper.PersonnelManagementMapper;
 import com.hy.warehousemanagement.pojo.PersonnelManagement;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -14,7 +14,8 @@ import java.util.List;
 
 /**
  * @author hy
- */ //@EnableWebSecurity
+ */
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource

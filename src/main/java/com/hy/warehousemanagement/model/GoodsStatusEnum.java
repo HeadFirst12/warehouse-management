@@ -6,6 +6,7 @@ package com.hy.warehousemanagement.model;
 
 public enum GoodsStatusEnum {
 
+    /** 超过上限 */
     OVER_CEILING_STATUS(5,"11","超过上限"),
     NEAR_CEILING_STATUS(4,"10","接近上限"),
     NORMAL_STATUS(3,"09","正常"),

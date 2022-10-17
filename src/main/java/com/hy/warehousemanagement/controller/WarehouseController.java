@@ -32,8 +32,7 @@ public class WarehouseController {
     @RequestMapping("/app/content/get-entry-warehouse-list")
     @ResponseBody
     public LayResult getEntryWarehouseList(LayRequest layRequest) {
-        LayResult entryWarehouseList = wareHouseService.getEntryWarehouseList(layRequest);
-        return entryWarehouseList;
+        return wareHouseService.getEntryWarehouseList(layRequest);
     }
 
     /**
@@ -42,8 +41,7 @@ public class WarehouseController {
     @PostMapping("/warehouse/entry-warehouse-add")
     @ResponseBody
     public AjaxResult WarehouseAdd(@RequestBody EntryWarehouseManagement entryWarehouseManagement) {
-        AjaxResult ajaxResult = wareHouseService.addEntryWarehouse(entryWarehouseManagement);
-        return ajaxResult;
+        return wareHouseService.addEntryWarehouse(entryWarehouseManagement);
     }
 
     /**
@@ -52,8 +50,7 @@ public class WarehouseController {
     @RequestMapping("/warehouse/entry-goods-search")
     @ResponseBody
     public LayResult searchEntryGoodsByGoods(EntryWarehouseManagement entryWarehouseManagement,LayRequest layRequest) {
-        LayResult layResult = wareHouseService.searchEntryGoodsByGoods(entryWarehouseManagement,layRequest);
-        return layResult;
+        return wareHouseService.searchEntryGoodsByGoods(entryWarehouseManagement,layRequest);
     }
 
     /**
@@ -63,8 +60,7 @@ public class WarehouseController {
     @RequestMapping("/app/content/get-out-warehouse-list")
     @ResponseBody
     public LayResult getOutWarehouseList(LayRequest layRequest) {
-        LayResult OutWarehouseList = wareHouseService.getOutWarehouseList(layRequest);
-        return OutWarehouseList;
+        return wareHouseService.getOutWarehouseList(layRequest);
     }
 
     /**
@@ -73,8 +69,7 @@ public class WarehouseController {
     @PostMapping("/warehouse/out-warehouse-add")
     @ResponseBody
     public AjaxResult OutWarehouseAdd(@RequestBody OutWarehouseManagement outWarehouseManagement) {
-        AjaxResult ajaxResult = wareHouseService.addOutWarehouse(outWarehouseManagement);
-        return ajaxResult;
+        return wareHouseService.addOutWarehouse(outWarehouseManagement);
     }
 
     /**
@@ -83,8 +78,7 @@ public class WarehouseController {
     @RequestMapping("/warehouse/out-goods-search")
     @ResponseBody
     public LayResult searchOutGoodsByGoods(OutWarehouseManagement outWarehouseManagement,LayRequest layRequest) {
-        LayResult layResult = wareHouseService.searchOutGoodsByOutGoods(outWarehouseManagement,layRequest);
-        return layResult;
+        return wareHouseService.searchOutGoodsByOutGoods(outWarehouseManagement,layRequest);
     }
 
 
@@ -94,8 +88,7 @@ public class WarehouseController {
     @RequestMapping("/warehouse/goods-list")
     @ResponseBody
     public LayResult getWarehouseWareList(LayRequest layRequest) {
-        LayResult layResult = wareHouseService.getWarehouseGoodsList(layRequest);
-        return layResult;
+        return wareHouseService.getWarehouseGoodsList(layRequest);
     }
 
     /**
@@ -104,8 +97,7 @@ public class WarehouseController {
     @PostMapping("/warehouse/goods-add")
     @ResponseBody
     public AjaxResult goodsAdd(@RequestBody GoodsManagement goodsManagement) {
-        AjaxResult ajaxResult = wareHouseService.addGoods(goodsManagement);
-        return ajaxResult;
+        return wareHouseService.addGoods(goodsManagement);
     }
 
     /**
@@ -148,7 +140,6 @@ public class WarehouseController {
     @RequestMapping("/warehouse/goods-search")
     @ResponseBody
     public LayResult searchGoodsByGoods(GoodsManagement goodsManagement,LayRequest layRequest) {
-        LayResult layResult = wareHouseService.searchGoodsByGoods(goodsManagement,layRequest);
-        return layResult;
+        return wareHouseService.searchGoodsByGoods(goodsManagement,layRequest);
     }
 }

@@ -14,7 +14,7 @@ layui.config({
         var index = parent.layer.getFrameIndex(window.name);
 
         //提交 Ajax 成功后，关闭当前弹层并重载表格
-        houseAjax("/warehouse/goods-add",field,false)
+        houseAjax("/warehouse/goods-add",field,false);
 
         $.ajax({
             //请求方式
@@ -27,11 +27,11 @@ layui.config({
             data : JSON.stringify(field),
             //请求成功
             success : function(result) {
-                if(result.code != "00000000") {
+                if(result.code !== "00000000") {
                     layer.msg('网络异常', {icon: 5});
                 }
 
-                if(result.status == "10") {
+                if(result.status === "10") {
                     console.log(result.errCode+'-'+result.errDesc, {icon: 5});
                     layer.msg(result.errCode+'-'+result.errDesc, {
                         offset: 't',
@@ -39,7 +39,7 @@ layui.config({
                     });
                 }
 
-                if(result.status == "09") {
+                if(result.status === "09") {
                     parent.layer.close(index);
                 }
 

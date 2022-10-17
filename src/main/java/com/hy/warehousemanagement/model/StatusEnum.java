@@ -19,9 +19,9 @@ public enum StatusEnum {
 
     AJAX_STATUS_IN_PROCESS("01","业务超时");
 
-    private String code;
+    private final String code;
 
-    private String desc;
+    private final String desc;
 
     StatusEnum(String code,String desc) {
         this.code = code;

@@ -1,6 +1,6 @@
 package com.hy.warehousemanagement.service.impl;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hy.warehousemanagement.exception.WarehouseException;
 import com.hy.warehousemanagement.mapper.PermissionManagementsMapper;
@@ -13,12 +13,10 @@ import com.hy.warehousemanagement.pojo.PersonnelManagement;
 import com.hy.warehousemanagement.service.PersonnelService;
 import com.hy.warehousemanagement.utils.AssembleResultUtil;
 import com.hy.warehousemanagement.utils.TimesUtil;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,36 +50,35 @@ public class PersonnelServiceImpl implements PersonnelService {
         }
 
         //定义好json对象集合 接收特殊处理之后的json集合
-        List<JSONObject> personnelManagementJSONArray = null;
-        if (personnelManagements.size() > 0) {
+        List<JSONObject> personnelManagementJsonArray = new ArrayList<>();
+        if (!personnelManagements.isEmpty()) {
             //先将整个对象转化和赋值过去
-            personnelManagementJSONArray = JSONArray.parseArray(JSONArray.toJSONString(personnelManagements), JSONObject.class);
+            personnelManagementJsonArray = JSON.parseArray(JSON.toJSONString(personnelManagements), JSONObject.class);
 
-            for (JSONObject personnelManagementJSON : personnelManagementJSONArray) {
+            for (JSONObject personnelManagementJson : personnelManagementJsonArray) {
 
                 //时间格式转化
-                String jonsTime = TimesUtil.dateToStringFormat(personnelManagementJSON.getDate(Constant.JOIN_TIME), TimesUtil.SHORT_DATE_FORMAT);
-                personnelManagementJSON.put(Constant.JOIN_TIME, jonsTime);
+                String jonsTime = TimesUtil.dateToStringFormat(personnelManagementJson.getDate(Constant.JOIN_TIME), TimesUtil.SHORT_DATE_FORMAT);
+                personnelManagementJson.put(Constant.JOIN_TIME, jonsTime);
 
                 //人员级别映射
-                Long permissionLevel = personnelManagementJSON.getLong(Constant.PERMISSION_LEVEL);
+                Long permissionLevel = personnelManagementJson.getLong(Constant.PERMISSION_LEVEL);
                 for (PermissionManagement permissionManagement : permissionManagements) {
                     if (permissionLevel.equals(permissionManagement.getPermissionId())) {
-                        personnelManagementJSON.put(Constant.PERMISSION_LEVEL, permissionManagement.getPermissionName());
+                        personnelManagementJson.put(Constant.PERMISSION_LEVEL, permissionManagement.getPermissionName());
                     }
                 }
 
                 //员工性别映射
-                if (personnelManagementJSON.getBoolean(Constant.SEX)) {
-                    personnelManagementJSON.put(Constant.SEX, Constant.SEX_MAN);
+                if (Boolean.TRUE.equals(personnelManagementJson.getBoolean(Constant.SEX))) {
+                    personnelManagementJson.put(Constant.SEX, Constant.SEX_MAN);
                 } else {
-                    personnelManagementJSON.put(Constant.SEX, Constant.SEX_WOMAN);
+                    personnelManagementJson.put(Constant.SEX, Constant.SEX_WOMAN);
                 }
 
             }
         }
-        LayResult layResult = AssembleResultUtil.assembleLayResult(personnelManagementJSONArray, personnelManagementNumber);
-        return layResult;
+        return AssembleResultUtil.assembleLayResult(personnelManagementJsonArray, personnelManagementNumber);
     }
 
     @Override
@@ -96,13 +93,11 @@ public class PersonnelServiceImpl implements PersonnelService {
         } catch (Exception e) {
             throw new WarehouseException(SystemErrorCodeEnum.DATABASE_ERROR);
         }
-        LayResult layResult = AssembleResultUtil.assembleLayResult(permissionManagements, personnelManagementNumber);
-        return layResult;
+        return AssembleResultUtil.assembleLayResult(permissionManagements, personnelManagementNumber);
     }
 
     @Override
     public PersonnelManagement checkPersonnelByPersonnel(PersonnelManagement personnelManagement) {
-        PersonnelManagement user = personnelManagementMapper.getPersonnelManagementByPersonnel(personnelManagement);
-        return user;
+        return personnelManagementMapper.getPersonnelManagementByPersonnel(personnelManagement);
     }
 }

@@ -1,5 +1,6 @@
 package com.hy.warehousemanagement.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hy.warehousemanagement.mapper.*;
@@ -9,6 +10,7 @@ import com.hy.warehousemanagement.utils.GetResultUtil;
 import com.hy.warehousemanagement.utils.TimesUtil;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,31 +41,31 @@ public class BaseWarehouseFilter {
      * 映射关系 公共方法提取
      */
     protected List<JSONObject> mapperGoodsManagement(List<GoodsManagement> goodsManagements) {
-        List<JSONObject> goodsManagementJSONArray = null;
-        if (goodsManagements.size() > 0) {
+        List<JSONObject> goodsManagementJsonArray = new ArrayList<>();
+        if (!goodsManagements.isEmpty()) {
             //先将整个对象转化和赋值过去
-            goodsManagementJSONArray = JSONArray.parseArray(JSONArray.toJSONString(goodsManagements), JSONObject.class);
+            goodsManagementJsonArray = JSON.parseArray(JSON.toJSONString(goodsManagements), JSONObject.class);
 
-            for (JSONObject goodsManagementJSON : goodsManagementJSONArray) {
+            for (JSONObject goodsManagementJson : goodsManagementJsonArray) {
                 //时间格式转化
-                mapperDate(goodsManagementJSON,Constant.CREATE_TIME,TimesUtil.NORMAL_DATE_24_HOUR_FORMAT);
-                mapperDate(goodsManagementJSON,Constant.UPDATE_TIME,TimesUtil.NORMAL_DATE_24_HOUR_FORMAT);
+                mapperDate(goodsManagementJson,Constant.CREATE_TIME,TimesUtil.NORMAL_DATE_24_HOUR_FORMAT);
+                mapperDate(goodsManagementJson,Constant.UPDATE_TIME,TimesUtil.NORMAL_DATE_24_HOUR_FORMAT);
 
                 //操作员映射
-                mapperOperator(goodsManagementJSON,Constant.LAST_OPERATOR_ID);
+                mapperOperator(goodsManagementJson,Constant.LAST_OPERATOR_ID);
 
                 //库存状态映射
-                mapperGoodsStatus(goodsManagementJSON,Constant.GOODS_STATUS_ID);
+                mapperGoodsStatus(goodsManagementJson,Constant.GOODS_STATUS_ID);
             }
         }
-        return goodsManagementJSONArray;
+        return goodsManagementJsonArray;
     }
 
     protected List<JSONObject> mapperEntryGoods (List<EntryWarehouseManagement> entryWarehouseManagements) {
         List<JSONObject> entryWarehouseManagementJsonArray = null;
-        if(entryWarehouseManagements.size() > 0) {
+        if(!entryWarehouseManagements.isEmpty()) {
             //先将整个对象转化和赋值过去
-            entryWarehouseManagementJsonArray = JSONArray.parseArray(JSONArray.toJSONString(entryWarehouseManagements), JSONObject.class);
+            entryWarehouseManagementJsonArray = JSON.parseArray(JSON.toJSONString(entryWarehouseManagements), JSONObject.class);
 
             for (JSONObject entryWarehouseManagementJson : entryWarehouseManagementJsonArray) {
                 //时间格式转化
@@ -80,9 +82,9 @@ public class BaseWarehouseFilter {
 
     protected List<JSONObject> mapperOutGoods (List<OutWarehouseManagement> outWarehouseManagements) {
         List<JSONObject> outWarehouseManagementJsonArray = null;
-        if(outWarehouseManagements.size() > 0) {
+        if(!outWarehouseManagements.isEmpty()) {
             //先将整个对象转化和赋值过去
-            outWarehouseManagementJsonArray = JSONArray.parseArray(JSONArray.toJSONString(outWarehouseManagements), JSONObject.class);
+            outWarehouseManagementJsonArray = JSON.parseArray(JSON.toJSONString(outWarehouseManagements), JSONObject.class);
 
             for (JSONObject outWarehouseManagementJson : outWarehouseManagementJsonArray) {
                 //时间格式转化
@@ -146,7 +148,6 @@ public class BaseWarehouseFilter {
         newGoodsManagement.setLastOperatorId(authenticationFilter.getNowUserId());
         newGoodsManagement.setGoodsId(oldGoodsManagement.getGoodsId());
         newGoodsManagement.setUpdateTime(new Date());
-        Integer integer = goodsManagementMapper.updateGoodsManagement(newGoodsManagement);
-        return integer;
+        return goodsManagementMapper.updateGoodsManagement(newGoodsManagement);
     }
 }

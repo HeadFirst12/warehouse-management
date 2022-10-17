@@ -30,9 +30,7 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
         List<EntryWarehouseManagement> entryWarehouseManagements = entryWarehouseManagementMapper.queryEntryWarehouseList(PageUtil.getPage(layRequest));
         Integer countEntryWarehouseNumber = entryWarehouseManagementMapper.countEntryWarehouseNumber();
         List<JSONObject> entryGoodsJsonArray = mapperEntryGoods(entryWarehouseManagements);
-        LayResult layResult = AssembleResultUtil.assembleLayResult(entryGoodsJsonArray, countEntryWarehouseNumber);
-
-        return layResult;
+        return AssembleResultUtil.assembleLayResult(entryGoodsJsonArray, countEntryWarehouseNumber);
     }
 
     @Override
@@ -75,11 +73,10 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
 
     @Override
     public LayResult searchEntryGoodsByGoods(EntryWarehouseManagement entryWarehouseManagement, LayRequest layRequest) {
-        List<EntryWarehouseManagement> EntryWarehouseManagements = entryWarehouseManagementMapper.selectEntryGoodsByEntryGoods(entryWarehouseManagement,PageUtil.getPage(layRequest));
+        List<EntryWarehouseManagement> entryWarehouseManagements = entryWarehouseManagementMapper.selectEntryGoodsByEntryGoods(entryWarehouseManagement,PageUtil.getPage(layRequest));
         Integer countEntryWarehouseNumber = entryWarehouseManagementMapper.countEntryWarehouseNumber();
-        List<JSONObject> EntryWarehouseJSONArray = mapperEntryGoods(EntryWarehouseManagements);
-        LayResult layResult = AssembleResultUtil.assembleLayResult(EntryWarehouseJSONArray, countEntryWarehouseNumber);
-        return layResult;
+        List<JSONObject> entryWarehouseJsonArray = mapperEntryGoods(entryWarehouseManagements);
+        return AssembleResultUtil.assembleLayResult(entryWarehouseJsonArray, countEntryWarehouseNumber);
     }
 
     /** 库存管理实现 */
@@ -87,9 +84,8 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
     public LayResult getWarehouseGoodsList(LayRequest layRequest) {
         List<GoodsManagement> goodsManagements = goodsManagementMapper.queryGoodsList(PageUtil.getPage(layRequest));
         Integer goodsNumber = goodsManagementMapper.countGoodsNumber();
-        List<JSONObject> goodsManagementJSONArray = mapperGoodsManagement(goodsManagements);
-        LayResult layResult = AssembleResultUtil.assembleLayResult(goodsManagementJSONArray, goodsNumber);
-        return layResult;
+        List<JSONObject> goodsManagementJsonArray = mapperGoodsManagement(goodsManagements);
+        return AssembleResultUtil.assembleLayResult(goodsManagementJsonArray, goodsNumber);
     }
 
     @Override
@@ -124,7 +120,7 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
         //处理前段传输过来的格式
         JSONArray goodsIdJsonList = goodsIdListJson.getJSONArray(Constant.GOODS_ID_LIST_JSON);
         //记录删除成功数量
-        Integer delCountNum = 0;
+        int delCountNum = 0;
         for (int i = 0; i < goodsIdJsonList.size(); i++) {
             JSONObject goodsIdJson = goodsIdJsonList.getJSONObject(i);
             String goodsId = goodsIdJson.getString(Constant.GOODS_ID);
@@ -137,8 +133,7 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
         //最后如果计数器的数量等于集合的长度，则删除成功
         Integer result = delCountNum == goodsIdJsonList.size() ? 1 : 0;
         //组装返回报文
-        AjaxResult ajaxResult = AssembleResultUtil.assembleAjaxResult(result);
-        return ajaxResult;
+        return AssembleResultUtil.assembleAjaxResult(result);
     }
 
     @Override
@@ -147,23 +142,20 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
         goodsManagement.setLastOperatorId(nowUserId);
         goodsManagement.setUpdateTime(new Date());
         Integer updateResult =  goodsManagementMapper.updateGoodsManagement(goodsManagement);
-        AjaxResult ajaxResult = AssembleResultUtil.assembleAjaxResult(updateResult);
-        return ajaxResult;
+        return AssembleResultUtil.assembleAjaxResult(updateResult);
     }
 
     @Override
     public GoodsManagement getGoodsByGoodsId(String goodsId) {
-        GoodsManagement goodsManagementById = goodsManagementMapper.getGoodsManagementById(goodsId);
-        return goodsManagementById;
+        return goodsManagementMapper.getGoodsManagementById(goodsId);
     }
 
     @Override
     public LayResult searchGoodsByGoods(GoodsManagement goodsManagement, LayRequest layRequest) {
         List<GoodsManagement> goodsManagements = goodsManagementMapper.selectGoodsByGoodsManagement(goodsManagement,PageUtil.getPage(layRequest));
         Integer goodsNumber = goodsManagementMapper.countGoodsNumberByGoodsManagement(goodsManagement);
-        List<JSONObject> goodsManagementJSONArray = mapperGoodsManagement(goodsManagements);
-        LayResult layResult = AssembleResultUtil.assembleLayResult(goodsManagementJSONArray, goodsNumber);
-        return layResult;
+        List<JSONObject> goodsManagementJsonArray = mapperGoodsManagement(goodsManagements);
+        return AssembleResultUtil.assembleLayResult(goodsManagementJsonArray, goodsNumber);
     }
 
     //出库日志实现
@@ -172,8 +164,7 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
         List<OutWarehouseManagement> outWarehouseManagements = outWarehouseManagementMapper.queryOutWarehouseList(PageUtil.getPage(layRequest));
         Integer countOutWarehouseNumber = outWarehouseManagementMapper.countOutWarehouseNumber();
         List<JSONObject> entryGoodsJsonArray = mapperOutGoods(outWarehouseManagements);
-        LayResult layResult = AssembleResultUtil.assembleLayResult(entryGoodsJsonArray, countOutWarehouseNumber);
-        return layResult;
+        return AssembleResultUtil.assembleLayResult(entryGoodsJsonArray, countOutWarehouseNumber);
     }
 
     @Override
@@ -208,9 +199,8 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
     public LayResult searchOutGoodsByOutGoods(OutWarehouseManagement outWarehouseManagement, LayRequest layRequest) {
         List<OutWarehouseManagement> outWarehouseManagements = outWarehouseManagementMapper.selectOutGoodsByOutGoods(outWarehouseManagement,PageUtil.getPage(layRequest));
         Integer countOutWarehouseNumber = outWarehouseManagementMapper.countOutWarehouseNumber();
-        List<JSONObject> outWarehouseJSONArray = mapperOutGoods(outWarehouseManagements);
-        LayResult layResult = AssembleResultUtil.assembleLayResult(outWarehouseJSONArray, countOutWarehouseNumber);
-        return layResult;
+        List<JSONObject> outWarehouseJsonArray = mapperOutGoods(outWarehouseManagements);
+        return AssembleResultUtil.assembleLayResult(outWarehouseJsonArray, countOutWarehouseNumber);
     }
 
     @Override
@@ -259,9 +249,8 @@ public class WareHouseServiceImpl extends BaseWarehouseFilter implements WareHou
     public LayResult getGoodsStatusAbnormal(LayRequest layRequest) {
         List<GoodsManagement> goodsManagements = goodsManagementMapper.selectGoodsListByStatusAbnormal(PageUtil.getPage(layRequest));
         Integer goodsNumber = goodsManagementMapper.countGoodsNumberByStatusAbnormal();
-        List<JSONObject> goodsManagementJSONArray = mapperGoodsManagement(goodsManagements);
-        LayResult layResult = AssembleResultUtil.assembleLayResult(goodsManagementJSONArray, goodsNumber);
-        return layResult;
+        List<JSONObject> goodsManagementJsonArray = mapperGoodsManagement(goodsManagements);
+        return AssembleResultUtil.assembleLayResult(goodsManagementJsonArray, goodsNumber);
     }
 
 

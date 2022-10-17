@@ -6,59 +6,73 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
  * 生成订单号工具类
+ *
  * @author hy
  */
 public class CreatOrderIdUtil {
 
-    private final static Integer TIME_LEN = 18;
+    private CreatOrderIdUtil() {
 
-    //不间断时间格式
-    public static final String NONSTOP_DATE_FORMAT = "yyyyMMddHHmmssSSS";
+    }
+
+    private static final Integer TIME_LEN = 18;
+
+    /**
+     * 不间断时间格式
+     */
+    public static final String NONSTOP_DATE_FORMAT = "yyyyMMddHHMM";
 
     public static String creatOrderId(String prefix, Integer length) {
         //格式化当前时间
         SimpleDateFormat sfDate = new SimpleDateFormat(NONSTOP_DATE_FORMAT);
         String strDate = sfDate.format(new Date());
 
-        //length长度不足17位不能生成订单号
-        if (length < 17) {
+        //生成长度小于时间长度，拒绝
+        if (length < TIME_LEN) {
             throw new WarehouseException(SystemErrorCodeEnum.CREAT_ORDER_ID_ERROR);
         }
 
         //根据需要的长度不足长度
-        String random = getRandom620(length - TIME_LEN);
+        String random = getRandomNumber(length - (prefix + strDate).length());
 
         //最后得到20位订单编号。
-        String orderId = prefix + strDate + random;
+        return prefix + strDate + random;
+    }
 
-        return orderId;
+    public static void main(String[] args) {
+        Map<String, String> map = new HashMap<>();
+        int count = 0;
+        for (int i = 0; i < 100; i++) {
+            String e = creatOrderId("E", 20);
+            if(map.containsKey(e)) {
+                count++;
+            }
+            map.put(e,"1");
+        }
+        System.out.println(count);
     }
 
     /**
-     * 获取6-10 的随机位数数字
+     * 获取1-8位的随机位数数字
      *
      * @param length 想要生成的长度
      * @return result
      */
-    public static String getRandom620(Integer length) {
-        String result = "";
-        Random rand = new Random();
-        int n = 20;
-        if (null != length && length > 0) {
-            n = length;
+    public static String getRandomNumber(int length) {
+        //小于0直接抛异常
+        if (length < 0 || length > 8) {
+            throw new WarehouseException(SystemErrorCodeEnum.CREAT_ORDER_ID_ERROR);
         }
-        int randInt;
-        for (int i = 0; i < n; i++) {
-            randInt = rand.nextInt(10);
-
-            result += randInt;
-        }
-        return result;
+        double v = Math.random() * 9 + 1;
+        double pow = Math.pow(10, length - 1);
+        int rs = (int) (v * pow);
+        return String.valueOf(rs);
     }
 
     /**
@@ -66,9 +80,9 @@ public class CreatOrderIdUtil {
      */
     public static String getGoodsId() {
         String str = UUID.randomUUID().toString();
-        str = str.replaceAll("-", "");
+        str = str.replace("-", "");
         str = str.toUpperCase();
-        str = StringUtils.substring(str,0,22);
+        str = StringUtils.substring(str, 0, 22);
         return str;
     }
 }

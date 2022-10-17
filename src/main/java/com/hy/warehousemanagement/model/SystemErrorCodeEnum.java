@@ -6,6 +6,7 @@ package com.hy.warehousemanagement.model;
  */
 public enum SystemErrorCodeEnum {
 
+    /** 数据库读写异常 */
     DATABASE_ERROR("C0300","数据库读写异常")
 
     ,CREAT_ORDER_ID_ERROR("C03001","创建订单异常")
@@ -29,11 +30,11 @@ public enum SystemErrorCodeEnum {
 
 
 
-    //错误码
-    private String errorCode;
+    /** 错误码 */
+    private final String errorCode;
 
-    //错误描述
-    private String errorDesc;
+    /** 错误描述 */
+    private final String errorDesc;
 
     SystemErrorCodeEnum(String errorCode, String errorDesc) {
         this.errorCode = errorCode;

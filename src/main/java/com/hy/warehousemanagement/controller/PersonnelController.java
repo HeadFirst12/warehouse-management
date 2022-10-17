@@ -20,14 +20,12 @@ public class PersonnelController {
     @RequestMapping("/user/administrators/list/get-personnel-list")
     @ResponseBody
     public LayResult getPersonnelList() {
-        LayResult layResult = personnelService.getPersonnelList();
-        return layResult;
+        return personnelService.getPersonnelList();
     }
 
     @RequestMapping("/user/administrators/list/get-permission-list")
     @ResponseBody
     public LayResult getPermissionList() {
-        LayResult layResult = personnelService.getPermissionList();
-        return layResult;
+        return personnelService.getPermissionList();
     }
 }
